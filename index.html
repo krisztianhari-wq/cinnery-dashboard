@@ -184,6 +184,7 @@
   .seg button{border:0; background:transparent; border-radius:999px; padding:5px 13px; font-size:12.5px; font-weight:600; color:var(--ink-3); cursor:pointer}
   .seg button.on{background:var(--surface); color:var(--ink); box-shadow:0 1px 2px rgba(43,31,38,.12)}
   .seg button:hover:not(.on){color:var(--ink-2)}
+  .seg.lang button{padding:5px 9px; font-size:11.5px; letter-spacing:.04em}
 
   /* ---------- csoportos oszlopok (év/év összevetés) ---------- */
   button.bar{border:0; background:none; padding:0; font:inherit; cursor:pointer}
@@ -282,13 +283,13 @@
       </svg>
       <div>
         <div class="brand-name">Cinnery</div>
-        <div class="brand-sub">Sales overview</div>
+        <div class="brand-sub" data-i18n="Sales overview">Sales overview</div>
       </div>
     </div>
     <div class="seg" id="viewSeg">
-      <button type="button" class="on" data-view="day">Day</button>
-      <button type="button" data-view="month">Month</button>
-      <button type="button" data-view="year">Year</button>
+      <button type="button" class="on" data-view="day" data-i18n="Day">Day</button>
+      <button type="button" data-view="month" data-i18n="Month">Month</button>
+      <button type="button" data-view="year" data-i18n="Year">Year</button>
     </div>
     <div class="datenav">
       <button id="prevDay" type="button" aria-label="Previous period">&#8249;</button>
@@ -298,36 +299,41 @@
     </div>
     <span class="chip chip-closed" id="openChip"><span class="dot"></span><span id="openTxt">—</span></span>
     <span class="chip chip-src" id="srcChip">Demo data</span>
+    <div class="seg lang" id="langSeg" aria-label="Language">
+      <button type="button" class="on" data-lang="en">EN</button>
+      <button type="button" data-lang="nl">NL</button>
+      <button type="button" data-lang="hu">HU</button>
+    </div>
   </div>
 </header>
 
 <div class="banner" id="demoBanner">
   <div class="banner-in">
-    <b>Demo data.</b>
-    <span>Lightspeed is not connected yet — the figures are generated examples, the layout is the real one.</span>
+    <b data-i18n="Demo data.">Demo data.</b>
+    <span data-i18n="Lightspeed is not connected yet — the figures are generated examples, the layout is the real one.">Lightspeed is not connected yet — the figures are generated examples, the layout is the real one.</span>
   </div>
 </div>
 
 <main class="wrap">
   <div class="grid" style="margin-bottom:14px">
     <div class="tile c3">
-      <div class="label">Revenue</div>
+      <div class="label" data-i18n="Revenue">Revenue</div>
       <div class="value lead" id="kpiRev">—</div>
       <div class="foot" id="kpiRevDelta"></div>
       <svg class="spark" id="spark" viewBox="0 0 200 26" preserveAspectRatio="none" role="img" aria-label="Revenue trend"></svg>
     </div>
     <div class="tile c3">
-      <div class="label">Orders</div>
+      <div class="label" data-i18n="Orders">Orders</div>
       <div class="value" id="kpiOrders">—</div>
       <div class="foot" id="kpiOrdersDelta"></div>
     </div>
     <div class="tile c3">
-      <div class="label">Average basket</div>
+      <div class="label" data-i18n="Average basket">Average basket</div>
       <div class="value" id="kpiAov">—</div>
       <div class="foot" id="kpiAovDelta"></div>
     </div>
     <div class="tile c3">
-      <div class="label">Cinnamon rolls sold</div>
+      <div class="label" data-i18n="Cinnamon rolls sold">Cinnamon rolls sold</div>
       <div class="value" id="kpiRolls">—</div>
       <div class="foot" id="kpiRollsDelta"></div>
     </div>
@@ -336,47 +342,47 @@
   <div class="grid" id="dayBoard">
     <section class="card c8" id="hourCard">
       <div class="card-head">
-        <h2>Through the day</h2>
-        <button class="tbtn" type="button" data-table="hourTable">Table</button>
+        <h2 data-i18n="Through the day">Through the day</h2>
+        <button class="tbtn" type="button" data-table="hourTable" data-i18n="Table">Table</button>
         <span class="hint" id="hourHint"></span>
       </div>
       <div class="legend">
-        <span><i style="background:var(--ch-pos)"></i>In-store (POS)</span>
-        <span><i style="background:var(--ch-pickup)"></i>Pickup pre-orders</span>
+        <span><i style="background:var(--ch-pos)"></i><span data-i18n="In-store (POS)">In-store (POS)</span></span>
+        <span><i style="background:var(--ch-pickup)"></i><span data-i18n="Pickup pre-orders">Pickup pre-orders</span></span>
       </div>
       <div id="hourPlot"></div>
       <div class="tablewrap" id="hourTable" hidden></div>
     </section>
 
     <section class="card c4" id="chanCard">
-      <div class="card-head"><h2>Channels</h2></div>
+      <div class="card-head"><h2 data-i18n="Channels">Channels</h2></div>
       <div id="chanBody"></div>
     </section>
 
     <section class="card c4" id="queueCard">
-      <div class="card-head"><h2>Pickup orders</h2><span class="hint" id="queueHint"></span></div>
+      <div class="card-head"><h2 data-i18n="Pickup orders">Pickup orders</h2><span class="hint" id="queueHint"></span></div>
       <div id="queueBody"></div>
     </section>
 
     <section class="card c4" id="opsCard">
-      <div class="card-head"><h2>Fulfilment</h2></div>
+      <div class="card-head"><h2 data-i18n="Fulfilment">Fulfilment</h2></div>
       <div id="opsBody"></div>
     </section>
 
     <section class="card c4" id="payCard">
-      <div class="card-head"><h2>Payments</h2><span class="hint">card only</span></div>
+      <div class="card-head"><h2 data-i18n="Payments">Payments</h2><span class="hint" data-i18n="card only">card only</span></div>
       <div id="payBody"></div>
     </section>
 
     <section class="card c7" id="prodCard">
-      <div class="card-head"><h2>Products</h2><span class="hint" id="prodHint"></span></div>
+      <div class="card-head"><h2 data-i18n="Products">Products</h2><span class="hint" id="prodHint"></span></div>
       <div id="prodBody"></div>
     </section>
 
     <section class="card c5" id="trendCard">
       <div class="card-head">
-        <h2>Last 14 days</h2>
-        <button class="tbtn" type="button" data-table="trendTable">Table</button>
+        <h2 data-i18n="Last 14 days">Last 14 days</h2>
+        <button class="tbtn" type="button" data-table="trendTable" data-i18n="Table">Table</button>
       </div>
       <div id="trendPlot"></div>
       <div class="tablewrap" id="trendTable" hidden></div>
@@ -387,19 +393,19 @@
     <section class="card c8">
       <div class="card-head">
         <h2 id="periodPlotTitle">Day by day</h2>
-        <button class="tbtn" type="button" data-table="periodTable">Table</button>
+        <button class="tbtn" type="button" data-table="periodTable" data-i18n="Table">Table</button>
         <span class="hint" id="periodPlotHint"></span>
       </div>
       <div class="legend">
-        <span><i style="background:var(--ch-pos)"></i>In-store (POS)</span>
-        <span><i style="background:var(--ch-pickup)"></i>Pickup pre-orders</span>
+        <span><i style="background:var(--ch-pos)"></i><span data-i18n="In-store (POS)">In-store (POS)</span></span>
+        <span><i style="background:var(--ch-pickup)"></i><span data-i18n="Pickup pre-orders">Pickup pre-orders</span></span>
       </div>
       <div id="periodPlot"></div>
       <div class="tablewrap" id="periodTable" hidden></div>
     </section>
 
     <section class="card c4">
-      <div class="card-head"><h2>Channels</h2></div>
+      <div class="card-head"><h2 data-i18n="Channels">Channels</h2></div>
       <div id="chanBody2"></div>
     </section>
 
@@ -424,12 +430,12 @@
     </section>
 
     <section class="card c4">
-      <div class="card-head"><h2>Payments</h2><span class="hint">card only</span></div>
+      <div class="card-head"><h2 data-i18n="Payments">Payments</h2><span class="hint" data-i18n="card only">card only</span></div>
       <div id="payBody2"></div>
     </section>
 
     <section class="card c12">
-      <div class="card-head"><h2>Products</h2><span class="hint" id="prodHint2"></span></div>
+      <div class="card-head"><h2 data-i18n="Products">Products</h2><span class="hint" id="prodHint2"></span></div>
       <div id="prodBody2"></div>
     </section>
   </div>
@@ -437,9 +443,9 @@
 
 <footer>
   <div class="fl">
-    <span><b>Sources:</b> Lightspeed Restaurant K Series (POS) · Order Anywhere (pickup)</span>
-    <span><b>Opening hours:</b> Mon closed · Tue–Sat 10–18 · Sun 12–17 (Europe/Amsterdam)</span>
-    <span style="margin-left:auto">Built by sadrobot</span>
+    <span><b data-i18n="Sources:">Sources:</b> Lightspeed Restaurant K Series (POS) · Order Anywhere (<span data-i18n="pickup">pickup</span>)</span>
+    <span><b data-i18n="Opening hours:">Opening hours:</b> <span data-i18n="Mon closed · Tue–Sat 10–18 · Sun 12–17">Mon closed · Tue–Sat 10–18 · Sun 12–17</span> (Europe/Amsterdam)</span>
+    <span style="margin-left:auto"><span data-i18n="Built by">Built by</span> sadrobot</span>
   </div>
 </footer>
 
@@ -451,12 +457,125 @@
 
   /* ===================== helpers ===================== */
   const TZ = "Europe/Amsterdam";
-  const eur = new Intl.NumberFormat("en-GB", {style:"currency", currency:"EUR", currencyDisplay:"narrowSymbol", minimumFractionDigits:0, maximumFractionDigits:0});
-  const eur2 = new Intl.NumberFormat("en-GB", {style:"currency", currency:"EUR", currencyDisplay:"narrowSymbol", minimumFractionDigits:2, maximumFractionDigits:2});
-  const num = new Intl.NumberFormat("en-GB");
-  const DOW = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const DOW_S = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-  const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  /* ===================== nyelvek ===================== */
+  /* Az angol szöveg maga a kulcs; csak az eltéréseket kell felsorolni. */
+  const DATES = {
+    en:{locale:"en-GB",
+        dow:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        dowS:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+        mon:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+        monF:["January","February","March","April","May","June","July","August","September","October","November","December"]},
+    nl:{locale:"nl-NL",
+        dow:["zondag","maandag","dinsdag","woensdag","donderdag","vrijdag","zaterdag"],
+        dowS:["zo","ma","di","wo","do","vr","za"],
+        mon:["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"],
+        monF:["januari","februari","maart","april","mei","juni","juli","augustus","september","oktober","november","december"]},
+    hu:{locale:"hu-HU",
+        dow:["vasárnap","hétfő","kedd","szerda","csütörtök","péntek","szombat"],
+        dowS:["V","H","K","Sze","Cs","P","Szo"],
+        mon:["jan.","febr.","márc.","ápr.","máj.","jún.","júl.","aug.","szept.","okt.","nov.","dec."],
+        monF:["január","február","március","április","május","június","július","augusztus","szeptember","október","november","december"]}
+  };
+  const I18N = {
+    nl:{
+      "Sales overview":"Verkoopoverzicht","Day":"Dag","Month":"Maand","Year":"Jaar",
+      "Today":"Vandaag","This month":"Deze maand","This year":"Dit jaar",
+      "Demo data":"Demogegevens","Live data":"Live gegevens","Demo data.":"Demogegevens.",
+      "Lightspeed is not connected yet — the figures are generated examples, the layout is the real one.":
+        "Lightspeed is nog niet gekoppeld — de cijfers zijn gegenereerde voorbeelden, de opzet is de echte.",
+      "Revenue":"Omzet","Orders":"Bestellingen","Average basket":"Gemiddelde besteding",
+      "Cinnamon rolls sold":"Cinnamon rolls verkocht","Revenue trend":"Omzetverloop",
+      "Through the day":"Verloop van de dag","Channels":"Kanalen","Pickup orders":"Afhaalbestellingen",
+      "Fulfilment":"Afhandeling","Payments":"Betalingen","Products":"Producten","Last 14 days":"Laatste 14 dagen",
+      "Day by day":"Dag voor dag","Month by month":"Maand voor maand","Months compared":"Maanden vergeleken",
+      "Months of {0}":"Maanden van {0}","Period facts":"Kerncijfers","Weekday pattern":"Patroon per weekdag","Quarters":"Kwartalen",
+      "Table":"Tabel","Chart":"Grafiek","card only":"alleen kaart",
+      "In-store (POS)":"Winkel (POS)","Pickup pre-orders":"Afhaalvoorbestellingen",
+      "In-store":"Winkel","Pickup":"Afhaal","Total":"Totaal","Hour":"Uur","Closed":"Gesloten","Not open yet":"Nog niet open",
+      "Open now · until {0}":"Nu open · tot {0}","Closed · opens {0}":"Gesloten · opent {0}","Closed · {0} {1}":"Gesloten · {0} {1}",
+      "Busiest":"Drukste","orders":"bestellingen","items":"items","item":"item","avg":"gem.","order":"bestelling",
+      "Items sold":"Verkochte items","Trading days":"Verkoopdagen","Average day":"Gemiddelde dag",
+      "First sale":"Eerste verkoop","Last sale":"Laatste verkoop",
+      "Debit card (PIN)":"Pinbetaling","Credit card":"Creditcard","in-store terminal":"winkelterminal",
+      "online pre-orders":"online voorbestellingen","Card turnover":"Kaartomzet","Refunds":"Terugbetalingen",
+      "Expected payout":"Verwachte uitbetaling",
+      "Median prep time":"Mediane bereidingstijd","Ready → collected":"Klaar → opgehaald","min":"min",
+      "Collected late":"Te laat opgehaald","Not collected":"Niet opgehaald","Cancelled":"Geannuleerd",
+      "Sold out":"Uitverkocht","products":"producten","sold out":"uitverkocht",
+      "Scheduled":"Ingepland","Baking":"In de oven","Ready":"Klaar","Collected":"Opgehaald","live":"live",
+      "pre-orders":"voorbestellingen","No pre-orders":"Geen voorbestellingen",
+      "Nothing came in through Order Anywhere.":"Er kwam niets binnen via Order Anywhere.",
+      "No pickup slots.":"Geen afhaaltijden.","No trading on this day.":"Deze dag geen verkoop.",
+      "more today":"meer vandaag","Cinnamon rolls":"Cinnamon rolls","Cookies":"Cookies","Drinks":"Dranken",
+      "Avg basket":"Gem. besteding","closed":"gesloten",
+      "Click a month to open it":"Klik op een maand om die te openen","Change":"Verschil",
+      "Days":"Dagen","vs prev month":"t.o.v. vorige maand","vs":"t.o.v.",
+      "Best day":"Beste dag","Quietest day":"Rustigste dag","Best month":"Beste maand",
+      "Sold-out events":"Keer uitverkocht","No trading days":"Geen verkoopdagen",
+      "trading days":"verkoopdagen","month to date":"maand tot nu toe","year to date":"jaar tot nu toe",
+      "average per open day":"gemiddelde per open dag","no trading":"geen verkoop",
+      "day":"dag","days":"dagen","same period":"zelfde periode","vs last":"t.o.v. vorige",
+      "Sources:":"Bronnen:","Opening hours:":"Openingstijden:","pickup":"afhaal","Built by":"Gemaakt door",
+      "Mon closed · Tue–Sat 10–18 · Sun 12–17":"Ma gesloten · di–za 10–18 · zo 12–17"
+    },
+    hu:{
+      "Sales overview":"Napi forgalom","Day":"Nap","Month":"Hónap","Year":"Év",
+      "Today":"Ma","This month":"Aktuális hónap","This year":"Aktuális év",
+      "Demo data":"Demó adatok","Live data":"Élő adatok","Demo data.":"Demó adatok.",
+      "Lightspeed is not connected yet — the figures are generated examples, the layout is the real one.":
+        "A Lightspeed még nincs rákötve — a számok generált példák, a szerkezet a valódi.",
+      "Revenue":"Bevétel","Orders":"Rendelés","Average basket":"Átlagos kosár",
+      "Cinnamon rolls sold":"Eladott csiga","Revenue trend":"Bevétel alakulása",
+      "Through the day":"Napi lefutás","Channels":"Csatornák","Pickup orders":"Átvételi rendelések",
+      "Fulfilment":"Teljesítés","Payments":"Fizetés","Products":"Termékek","Last 14 days":"Utolsó 14 nap",
+      "Day by day":"Napi bontás","Month by month":"Havi bontás","Months compared":"Hónapok összevetése",
+      "Months of {0}":"{0} hónapjai","Period facts":"Az időszak tényei","Weekday pattern":"Heti mintázat","Quarters":"Negyedévek",
+      "Table":"Táblázat","Chart":"Diagram","card only":"csak kártya",
+      "In-store (POS)":"Bolti (POS)","Pickup pre-orders":"Átvételes előrendelés",
+      "In-store":"Bolti","Pickup":"Átvétel","Total":"Összesen","Hour":"Óra","Closed":"Zárva","Not open yet":"Még nem nyitott",
+      "Open now · until {0}":"Most nyitva · {0}-ig","Closed · opens {0}":"Zárva · {0}-tól","Closed · {0} {1}":"Zárva · {0} {1}",
+      "Busiest":"Csúcs","orders":"rendelés","items":"tétel","item":"tétel","avg":"átlag","order":"rendelés",
+      "Items sold":"Eladott tétel","Trading days":"Nyitvatartási nap","Average day":"Napi átlag",
+      "First sale":"Első tranzakció","Last sale":"Utolsó tranzakció",
+      "Debit card (PIN)":"Bankkártya (PIN)","Credit card":"Hitelkártya","in-store terminal":"bolti terminál",
+      "online pre-orders":"online előrendelés","Card turnover":"Kártyás forgalom","Refunds":"Visszatérítés",
+      "Expected payout":"Várható jóváírás",
+      "Median prep time":"Medián készítési idő","Ready → collected":"Kész → átvéve","min":"perc",
+      "Collected late":"Késve átvett","Not collected":"Nem vitték el","Cancelled":"Sztornó",
+      "Sold out":"Elfogyott","products":"féle","sold out":"elfogyott",
+      "Scheduled":"Ütemezve","Baking":"Készül","Ready":"Kész","Collected":"Átvéve","live":"élő",
+      "pre-orders":"előrendelés","No pre-orders":"Nincs előrendelés",
+      "Nothing came in through Order Anywhere.":"Erre a napra nem érkezett Order Anywhere rendelés.",
+      "No pickup slots.":"Nincs átvételi idősáv.","No trading on this day.":"Ezen a napon nincs forgalom.",
+      "more today":"további a napon","Cinnamon rolls":"Csigák","Cookies":"Sütik","Drinks":"Italok",
+      "Avg basket":"Átlagos kosár","closed":"zárva",
+      "Click a month to open it":"Kattints egy hónapra a megnyitásához","Change":"Változás",
+      "Days":"Napok","vs prev month":"előző hónap","vs":"vs",
+      "Best day":"Legjobb nap","Quietest day":"Leggyengébb nap","Best month":"Legjobb hónap",
+      "Sold-out events":"Elfogyás","No trading days":"Nincs nyitvatartási nap",
+      "trading days":"nyitvatartási nap","month to date":"hónap eddig","year to date":"év eddig",
+      "average per open day":"átlag nyitvatartási naponként","no trading":"nincs forgalom",
+      "day":"nap","days":"nap","same period":"azonos időszak","vs last":"múlt",
+      "Sources:":"Források:","Opening hours:":"Nyitvatartás:","pickup":"átvétel","Built by":"Készítette:",
+      "Mon closed · Tue–Sat 10–18 · Sun 12–17":"H zárva · K–Szo 10–18 · V 12–17"
+    }
+  };
+  let lang = "en";
+  const t = k => lang === "en" ? k : ((I18N[lang] && I18N[lang][k]) || k);
+  const tf = (k, ...a) => t(k).replace(/\{(\d)\}/g, (_, i) => a[+i]);
+  let eur, eur2, num, dec1, DOW, DOW_S, MON, MONTHS_FULL;
+  function applyLang(code){
+    lang = (code === "en" || I18N[code]) ? code : "en";
+    const d = DATES[lang] || DATES.en;
+    DOW = d.dow; DOW_S = d.dowS; MON = d.mon; MONTHS_FULL = d.monF;
+    eur = new Intl.NumberFormat(d.locale, {style:"currency", currency:"EUR", currencyDisplay:"narrowSymbol", minimumFractionDigits:0, maximumFractionDigits:0});
+    eur2 = new Intl.NumberFormat(d.locale, {style:"currency", currency:"EUR", currencyDisplay:"narrowSymbol", minimumFractionDigits:2, maximumFractionDigits:2});
+    num = new Intl.NumberFormat(d.locale);
+    dec1 = new Intl.NumberFormat(d.locale, {minimumFractionDigits:1, maximumFractionDigits:1});
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(e => { e.textContent = t(e.dataset.i18n); });
+    Array.prototype.forEach.call(el("langSeg").children, b => b.classList.toggle("on", b.dataset.lang === lang));
+  }
 
   const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const el = id => document.getElementById(id);
@@ -476,11 +595,15 @@
   }
   function longDate(iso){
     const d = new Date(iso + "T12:00:00Z");
-    return d.getUTCDate() + " " + MON[d.getUTCMonth()] + " " + d.getUTCFullYear();
+    return lang === "hu"
+      ? d.getUTCFullYear() + ". " + MON[d.getUTCMonth()] + " " + d.getUTCDate() + "."
+      : d.getUTCDate() + " " + MON[d.getUTCMonth()] + " " + d.getUTCFullYear();
   }
   function shortDate(iso){
     const d = new Date(iso + "T12:00:00Z");
-    return d.getUTCDate() + " " + MON[d.getUTCMonth()];
+    return lang === "hu"
+      ? MON[d.getUTCMonth()] + " " + d.getUTCDate() + "."
+      : d.getUTCDate() + " " + MON[d.getUTCMonth()];
   }
   const hhmm = m => String(Math.floor(m/60)).padStart(2,"0") + ":" + String(Math.round(m%60)).padStart(2,"0");
 
@@ -667,12 +790,14 @@
   }
 
   /* ===================== hónap / év összesítés ===================== */
-  const MONTHS_FULL = ["January","February","March","April","May","June",
-                       "July","August","September","October","November","December"];
   const AGG_CACHE = new Map();
   const ym = iso => iso.slice(0,7);
-  const monthLabel = m => MONTHS_FULL[+m.slice(5,7) - 1] + " " + m.slice(0,4);
-  const monthShort = m => MON[+m.slice(5,7) - 1] + " " + m.slice(0,4);
+  const monthLabel = m => lang === "hu"
+    ? m.slice(0,4) + ". " + MONTHS_FULL[+m.slice(5,7) - 1]
+    : MONTHS_FULL[+m.slice(5,7) - 1] + " " + m.slice(0,4);
+  const monthShort = m => lang === "hu"
+    ? m.slice(0,4) + ". " + MON[+m.slice(5,7) - 1]
+    : MON[+m.slice(5,7) - 1] + " " + m.slice(0,4);
   function shiftMonth(m, k){
     let y = +m.slice(0,4), mo = +m.slice(5,7) - 1 + k;
     y += Math.floor(mo/12); mo = ((mo % 12) + 12) % 12;
@@ -807,7 +932,7 @@
     tiles.forEach(([vId, dId, get, fmt], i) => {
       el(vId).textContent = closed ? "—" : (i === 0 ? eur.format(cur.gross) : fmt(get(cur)));
       if(closed){
-        el(dId).innerHTML = i === 0 ? '<span class="grp"><span class="delta cap">' + esc(cur.closedNote || "Closed") + "</span></span>" : "";
+        el(dId).innerHTML = i === 0 ? '<span class="grp"><span class="delta cap">' + esc(cur.closedNote || t("Closed")) + "</span></span>" : "";
         return;
       }
       el(dId).innerHTML = comps.map(c => '<span class="grp">' +
@@ -884,7 +1009,7 @@
   /* ===================== napi lefutás ===================== */
   function renderHourly(day){
     if(day.closed){
-      el("hourPlot").innerHTML = '<div class="empty"><strong>' + esc(day.closedNote || "Closed") + "</strong><span>No trading on this day.</span></div>";
+      el("hourPlot").innerHTML = '<div class="empty"><strong>' + esc(day.closedNote || t("Closed")) + "</strong><span>" + t("No trading on this day.") + "</span></div>";
       el("hourHint").textContent = "";
       el("hourTable").innerHTML = "";
       return;
@@ -903,9 +1028,9 @@
         peak: s === peakH ? eur.format(tot) : null,
         segs:[{v:h.pos, color:"var(--ch-pos)"}, {v:h.pickup, color:"var(--ch-pickup)"}],
         tip: tipRows(s + ":00–" + (s+1) + ":00", [
-          {k:"In-store", v:eur2.format(h.pos) + " · " + h.posOrders, color:"var(--ch-pos)"},
-          {k:"Pickup", v:eur2.format(h.pickup) + " · " + h.pickupOrders, color:"var(--ch-pickup)"},
-          {k:"Total", v:eur2.format(tot)}
+          {k:t("In-store"), v:eur2.format(h.pos) + " · " + h.posOrders, color:"var(--ch-pos)"},
+          {k:t("Pickup"), v:eur2.format(h.pickup) + " · " + h.pickupOrders, color:"var(--ch-pickup)"},
+          {k:t("Total"), v:eur2.format(tot)}
         ])
       };
     });
@@ -914,7 +1039,7 @@
       tick: v => "€" + Math.round(v), height:176, gap:7,
       aria:"Revenue per hour by channel, busiest at " + peakH + ":00"
     });
-    el("hourHint").innerHTML = "Busiest <b>" + peakH + ":00</b>";
+    el("hourHint").innerHTML = t("Busiest") + " <b>" + peakH + ":00</b>";
 
     let rows = "";
     day.slots.forEach(s => {
@@ -922,16 +1047,17 @@
       rows += "<tr><td>" + s + ":00</td><td>" + eur2.format(h.pos) + "</td><td>" + h.posOrders +
         "</td><td>" + eur2.format(h.pickup) + "</td><td>" + h.pickupOrders + "</td><td>" + eur2.format(h.pos + h.pickup) + "</td></tr>";
     });
-    el("hourTable").innerHTML = "<table><thead><tr><th>Hour</th><th>In-store</th><th>Orders</th><th>Pickup</th><th>Orders</th><th>Total</th></tr></thead><tbody>" + rows + "</tbody></table>";
+    el("hourTable").innerHTML = "<table><thead><tr><th>" + t("Hour") + "</th><th>" + t("In-store") + "</th><th>" + t("Orders") +
+      "</th><th>" + t("Pickup") + "</th><th>" + t("Orders") + "</th><th>" + t("Total") + "</th></tr></thead><tbody>" + rows + "</tbody></table>";
   }
 
   /* ===================== csatornák ===================== */
   function renderChannels(data, bodyId){
     const box = el(bodyId);
-    if(data.closed){ box.innerHTML = '<div class="empty"><strong>Closed</strong></div>'; return; }
+    if(data.closed){ box.innerHTML = '<div class="empty"><strong>' + t("Closed") + "</strong></div>"; return; }
     const defs = [
-      {key:"pos", name:"In-store", sub:"Lightspeed POS", color:"var(--ch-pos)"},
-      {key:"pickup", name:"Pickup pre-orders", sub:"Order Anywhere", color:"var(--ch-pickup)"}
+      {key:"pos", name:t("In-store"), sub:"Lightspeed POS", color:"var(--ch-pos)"},
+      {key:"pickup", name:t("Pickup pre-orders"), sub:"Order Anywhere", color:"var(--ch-pickup)"}
     ];
     const total = data.gross || 1;
     let html = '<div class="rows">';
@@ -942,19 +1068,19 @@
         '<span class="name"><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:' + d.color + ';margin-right:7px"></span>' + esc(d.name) + "</span>" +
         '<span class="val">' + eur2.format(c.gross) + "</span>" +
         '<div class="track"><i style="width:' + share.toFixed(1) + "%;background:" + d.color + '"></i></div>' +
-        '<div class="sub"><span>' + esc(d.sub) + "</span><span>·</span><span>" + num.format(c.orders) + " orders</span><span>·</span><span>avg " +
+        '<div class="sub"><span>' + esc(d.sub) + "</span><span>·</span><span>" + num.format(c.orders) + " " + t("orders") + "</span><span>·</span><span>" + t("avg") + " " +
         eur2.format(c.aov) + '</span><span style="margin-left:auto">' + share.toFixed(0) + "%</span></div></div>";
     });
     html += "</div>";
     const items = data.channels.pos.items + data.channels.pickup.items;
     html += '<dl class="kv" style="margin-top:14px"><div class="sep"></div>' +
-      "<dt>Items sold</dt><dd>" + num.format(items) + "</dd>";
+      "<dt>" + t("Items sold") + "</dt><dd>" + num.format(items) + "</dd>";
     if(data.period){
-      html += "<dt>Trading days</dt><dd>" + num.format(data.openDays) + "</dd>" +
-              "<dt>Average day</dt><dd>" + eur2.format(data.dayAvg) + "</dd>";
+      html += "<dt>" + t("Trading days") + "</dt><dd>" + num.format(data.openDays) + "</dd>" +
+              "<dt>" + t("Average day") + "</dt><dd>" + eur2.format(data.dayAvg) + "</dd>";
     }else{
-      html += "<dt>First sale</dt><dd>" + (data.ops.firstMin != null ? hhmm(data.ops.firstMin) : "—") + "</dd>" +
-              "<dt>Last sale</dt><dd>" + (data.ops.lastMin != null ? hhmm(data.ops.lastMin) : "—") + "</dd>";
+      html += "<dt>" + t("First sale") + "</dt><dd>" + (data.ops.firstMin != null ? hhmm(data.ops.firstMin) : "—") + "</dd>" +
+              "<dt>" + t("Last sale") + "</dt><dd>" + (data.ops.lastMin != null ? hhmm(data.ops.lastMin) : "—") + "</dd>";
     }
     html += "</dl>";
     box.innerHTML = html;
@@ -962,24 +1088,24 @@
 
   /* ===================== átvételi sor ===================== */
   function statusOf(day, q){
-    if(day.iso < state.today) return q.missed ? ["Not collected","st-miss"] : ["Collected","st-done"];
-    if(day.iso > state.today) return ["Scheduled","st-sched"];
+    if(day.iso < state.today) return q.missed ? [t("Not collected"),"st-miss"] : [t("Collected"),"st-done"];
+    if(day.iso > state.today) return [t("Scheduled"),"st-sched"];
     const now = minutesNow();
-    if(q.at > now + 25) return ["Scheduled","st-sched"];
-    if(q.at > now - 4) return ["Baking","st-prep"];
-    if(q.at > now - 22) return ["Ready","st-ready"];
-    return q.missed ? ["Not collected","st-miss"] : ["Collected","st-done"];
+    if(q.at > now + 25) return [t("Scheduled"),"st-sched"];
+    if(q.at > now - 4) return [t("Baking"),"st-prep"];
+    if(q.at > now - 22) return [t("Ready"),"st-ready"];
+    return q.missed ? [t("Not collected"),"st-miss"] : [t("Collected"),"st-done"];
   }
 
   function renderQueue(day){
     if(day.closed){
-      el("queueBody").innerHTML = '<div class="empty"><strong>' + esc(day.closedNote || "Closed") + "</strong><span>No pickup slots.</span></div>";
+      el("queueBody").innerHTML = '<div class="empty"><strong>' + esc(day.closedNote || t("Closed")) + "</strong><span>" + t("No pickup slots.") + "</span></div>";
       el("queueHint").textContent = "";
       return;
     }
     const all = day.queue.slice().sort((a,b) => a.at - b.at);
     if(day.ops.noShow && all.length) all[Math.max(0, all.length - 3)].missed = true;
-    el("queueHint").textContent = day.iso === state.today ? "live" : all.length + " pre-orders";
+    el("queueHint").textContent = day.iso === state.today ? t("live") : all.length + " " + t("pre-orders");
 
     let list = all;
     if(day.iso === state.today){
@@ -989,7 +1115,7 @@
     }
     const shown = list.slice(0, 7);
     if(!shown.length){
-      el("queueBody").innerHTML = '<div class="empty"><strong>No pre-orders</strong><span>Nothing came in through Order Anywhere.</span></div>';
+      el("queueBody").innerHTML = '<div class="empty"><strong>' + t("No pre-orders") + "</strong><span>" + t("Nothing came in through Order Anywhere.") + "</span></div>";
       return;
     }
     let html = '<div class="queue">';
@@ -1000,38 +1126,38 @@
         '<span class="items">' + esc(items) + "</span>" +
         '<span class="st ' + st[1] + '">' + st[0] + "</span>" +
         '<span class="ref">' + esc(q.ref) + "</span>" +
-        '<span class="amount">' + eur2.format(q.gross) + " · " + q.n + " items</span></div>";
+        '<span class="amount">' + eur2.format(q.gross) + " · " + q.n + " " + t(q.n === 1 ? "item" : "items") + "</span></div>";
     });
     html += "</div>";
-    if(all.length > shown.length) html += '<div class="note">+' + (all.length - shown.length) + " more today</div>";
+    if(all.length > shown.length) html += '<div class="note">+' + (all.length - shown.length) + " " + t("more today") + "</div>";
     el("queueBody").innerHTML = html;
   }
 
   /* ===================== teljesítés ===================== */
   function renderOps(day){
-    if(day.closed){ el("opsBody").innerHTML = '<div class="empty"><strong>' + esc(day.closedNote || "Closed") + "</strong></div>"; return; }
+    if(day.closed){ el("opsBody").innerHTML = '<div class="empty"><strong>' + esc(day.closedNote || t("Closed")) + "</strong></div>"; return; }
     const o = day.ops;
     const flag = (v, warn) => v >= warn ? ' style="color:var(--warn)"' : "";
     el("opsBody").innerHTML = '<dl class="kv">' +
-      "<dt>Median prep time</dt><dd>" + o.prepMedian.toFixed(1) + " <small>min</small></dd>" +
-      "<dt>Ready → collected</dt><dd>" + o.readyToCollect.toFixed(1) + " <small>min</small></dd>" +
-      "<dt>Collected late</dt><dd" + flag(o.late, 3) + ">" + o.late + "</dd>" +
-      "<dt>Not collected</dt><dd" + flag(o.noShow, 1) + ">" + o.noShow + "</dd>" +
+      "<dt>" + t("Median prep time") + "</dt><dd>" + dec1.format(o.prepMedian) + " <small>" + t("min") + "</small></dd>" +
+      "<dt>" + t("Ready → collected") + "</dt><dd>" + dec1.format(o.readyToCollect) + " <small>" + t("min") + "</small></dd>" +
+      "<dt>" + t("Collected late") + "</dt><dd" + flag(o.late, 3) + ">" + o.late + "</dd>" +
+      "<dt>" + t("Not collected") + "</dt><dd" + flag(o.noShow, 1) + ">" + o.noShow + "</dd>" +
       '<div class="sep"></div>' +
-      "<dt>Cancelled</dt><dd" + flag(o.cancelled, 2) + ">" + o.cancelled + "</dd>" +
-      "<dt>Refunds</dt><dd>" + eur2.format(o.refunds) + "</dd>" +
-      "<dt>Sold out</dt><dd>" + Object.keys(day.soldOutAt).length + " <small>products</small></dd>" +
+      "<dt>" + t("Cancelled") + "</dt><dd" + flag(o.cancelled, 2) + ">" + o.cancelled + "</dd>" +
+      "<dt>" + t("Refunds") + "</dt><dd>" + eur2.format(o.refunds) + "</dd>" +
+      "<dt>" + t("Sold out") + "</dt><dd>" + Object.keys(day.soldOutAt).length + " <small>" + t("products") + "</small></dd>" +
       "</dl>";
   }
 
   /* ===================== fizetés ===================== */
   function renderPay(data, bodyId){
     const box = el(bodyId);
-    if(data.closed){ box.innerHTML = '<div class="empty"><strong>Closed</strong></div>'; return; }
+    if(data.closed){ box.innerHTML = '<div class="empty"><strong>' + t("Closed") + "</strong></div>"; return; }
     const defs = [
-      {k:"pin", name:"Debit card (PIN)", sub:"in-store terminal"},
-      {k:"credit", name:"Credit card", sub:"in-store terminal"},
-      {k:"ideal", name:"iDEAL", sub:"online pre-orders"}
+      {k:"pin", name:t("Debit card (PIN)"), sub:t("in-store terminal")},
+      {k:"credit", name:t("Credit card"), sub:t("in-store terminal")},
+      {k:"ideal", name:"iDEAL", sub:t("online pre-orders")}
     ];
     const total = data.pay.pin + data.pay.credit + data.pay.ideal || 1;
     let html = '<div class="rows">';
@@ -1042,9 +1168,9 @@
         '<div class="sub"><span>' + esc(d.sub) + '</span><span style="margin-left:auto">' + (v/total*100).toFixed(0) + "%</span></div></div>";
     });
     html += "</div>";
-    html += '<dl class="kv" style="margin-top:14px"><div class="sep"></div><dt>Card turnover</dt><dd>' + eur2.format(total) + "</dd>" +
-      "<dt>Refunds</dt><dd>−" + eur2.format(data.ops.refunds) + "</dd>" +
-      "<dt>Expected payout</dt><dd>" + eur2.format(r2(total - data.ops.refunds)) + "</dd></dl>";
+    html += '<dl class="kv" style="margin-top:14px"><div class="sep"></div><dt>' + t("Card turnover") + "</dt><dd>" + eur2.format(total) + "</dd>" +
+      "<dt>" + t("Refunds") + "</dt><dd>−" + eur2.format(data.ops.refunds) + "</dd>" +
+      "<dt>" + t("Expected payout") + "</dt><dd>" + eur2.format(r2(total - data.ops.refunds)) + "</dd></dl>";
     box.innerHTML = html;
   }
 
@@ -1052,7 +1178,7 @@
   function renderProducts(data, bodyId, hintId){
     const box = el(bodyId), hint = el(hintId);
     if(data.closed){
-      box.innerHTML = '<div class="empty"><strong>Closed</strong></div>';
+      box.innerHTML = '<div class="empty"><strong>' + t("Closed") + "</strong></div>";
       hint.textContent = "";
       return;
     }
@@ -1064,14 +1190,14 @@
       const catTotal = list.reduce((s,x) => s + x.qty, 0);
       totalItems += catTotal;
       const max = Math.max(1, ...list.map(x => x.qty));
-      html += '<div class="cat">' + CAT_LABEL[cat] + " · " + num.format(catTotal) + "</div>";
+      html += '<div class="cat">' + t(CAT_LABEL[cat]) + " · " + num.format(catTotal) + "</div>";
       list.forEach(x => {
         let chip = "";
         if(data.period){
           const c = data.soldOutCount[x.p.id] || 0;
-          if(c) chip = '<span class="soldout">sold out ' + c + (c === 1 ? " day" : " days") + "</span>";
+          if(c) chip = '<span class="soldout">' + t("sold out") + " " + c + " " + t(c === 1 ? "day" : "days") + "</span>";
         }else if(data.soldOutAt[x.p.id] != null){
-          chip = '<span class="soldout">sold out ' + hhmm(data.soldOutAt[x.p.id]) + "</span>";
+          chip = '<span class="soldout">' + t("sold out") + " " + hhmm(data.soldOutAt[x.p.id]) + "</span>";
         }
         html += '<div class="prod"><span class="pname">' + esc(x.p.name) + chip + "</span>" +
           '<span class="pqty">' + num.format(x.qty) + "</span>" +
@@ -1080,7 +1206,7 @@
       });
     });
     box.innerHTML = html;
-    hint.textContent = num.format(totalItems) + " items";
+    hint.textContent = num.format(totalItems) + " " + t("items");
   }
 
   /* ===================== 14 napos trend ===================== */
@@ -1097,27 +1223,28 @@
       closed: d.closed,
       segs:[{v:d.closed ? 0 : d.gross, color: d.iso === iso ? "var(--brand)" : "var(--mag)"}],
       tip: d.closed
-        ? tipRows(DOW[d.dow] + ", " + shortDate(d.iso), [{k: d.before ? "Not open yet" : "Closed", v:"—"}])
+        ? tipRows(DOW[d.dow] + ", " + shortDate(d.iso), [{k: t(d.before ? "Not open yet" : "Closed"), v:"—"}])
         : tipRows(DOW[d.dow] + ", " + shortDate(d.iso), [
-            {k:"Revenue", v:eur2.format(d.gross)},
-            {k:"Orders", v:String(d.orders)},
-            {k:"Average basket", v:eur2.format(d.aov)}
+            {k:t("Revenue"), v:eur2.format(d.gross)},
+            {k:t("Orders"), v:String(d.orders)},
+            {k:t("Average basket"), v:eur2.format(d.aov)}
           ])
     }));
     el("trendPlot").innerHTML = barChart({
       items, max, gap:5, height:150,
       tick: v => "€" + Math.round(v),
-      avg, avgLabel:"avg " + eur.format(avg),
+      avg, avgLabel:t("avg") + " " + eur.format(avg),
       aria:"Daily revenue over the last 14 days, average " + eur.format(avg)
     });
 
     let rows = "";
     days.slice().reverse().forEach(d => {
       rows += "<tr><td>" + shortDate(d.iso) + " " + DOW_S[d.dow] + "</td><td>" +
-        (d.closed ? "closed" : eur2.format(d.gross)) + "</td><td>" + (d.closed ? "—" : d.orders) +
+        (d.closed ? t("closed") : eur2.format(d.gross)) + "</td><td>" + (d.closed ? "—" : d.orders) +
         "</td><td>" + (d.closed ? "—" : eur2.format(d.aov)) + "</td></tr>";
     });
-    el("trendTable").innerHTML = "<table><thead><tr><th>Day</th><th>Revenue</th><th>Orders</th><th>Avg basket</th></tr></thead><tbody>" + rows + "</tbody></table>";
+    el("trendTable").innerHTML = "<table><thead><tr><th>" + t("Day") + "</th><th>" + t("Revenue") + "</th><th>" +
+      t("Orders") + "</th><th>" + t("Avg basket") + "</th></tr></thead><tbody>" + rows + "</tbody></table>";
   }
 
   /* ===================== csoportos oszlopok (év/év) ===================== */
@@ -1163,7 +1290,7 @@
         tip: tipRows(MONTHS_FULL[i], [
           {k:year, v:a.gross > 0 ? eur2.format(a.gross) : "—"},
           {k:prevYear, v:pv.gross > 0 ? eur2.format(pv.gross) : "—"},
-          {k:"Change", v:diff == null ? "—" : (diff > 0 ? "+" : "") + diff.toFixed(0) + "%"}
+          {k:t("Change"), v:diff == null ? "—" : (diff > 0 ? "+" : "") + diff.toFixed(0) + "%"}
         ])
       };
     });
@@ -1171,7 +1298,7 @@
       items, max, tick: v => "€" + Math.round(v), height:172, gap:6,
       aria:"Monthly revenue in " + year + " compared with " + prevYear
     });
-    el("cmpHint").textContent = "Click a month to open it";
+    el("cmpHint").textContent = t("Click a month to open it");
 
     let rows = "";
     cur.forEach((a, i) => {
@@ -1187,37 +1314,38 @@
         "</td><td>" + (a.openDays ? eur2.format(a.aov) : "—") + "</td><td>" + (a.openDays ? a.openDays : "—") + "</td>" +
         cell(dm) + cell(dy) + "</tr>";
     });
-    el("cmpTable").innerHTML = "<table><thead><tr><th>Month</th><th>Revenue</th><th>Orders</th><th>Avg basket</th>" +
-      "<th>Days</th><th>vs prev month</th><th>vs " + prevYear + "</th></tr></thead><tbody>" + rows + "</tbody></table>";
+    el("cmpTable").innerHTML = "<table><thead><tr><th>" + t("Month") + "</th><th>" + t("Revenue") + "</th><th>" + t("Orders") +
+      "</th><th>" + t("Avg basket") + "</th><th>" + t("Days") + "</th><th>" + t("vs prev month") + "</th><th>" +
+      t("vs") + " " + prevYear + "</th></tr></thead><tbody>" + rows + "</tbody></table>";
   }
 
   /* ===================== időszak tényei ===================== */
   function renderFacts(agg, isYear){
-    if(agg.closed){ el("factsBody").innerHTML = '<div class="empty"><strong>No trading days</strong></div>'; return; }
+    if(agg.closed){ el("factsBody").innerHTML = '<div class="empty"><strong>' + t("No trading days") + "</strong></div>"; return; }
     const dayLine = d => d ? shortDate(d.iso) + " " + DOW_S[d.dow] + " · " + eur2.format(d.gross) : "—";
     let html = '<dl class="kv">' +
-      "<dt>Trading days</dt><dd>" + num.format(agg.openDays) + "</dd>" +
-      "<dt>Average day</dt><dd>" + eur2.format(agg.dayAvg) + "</dd>" +
-      "<dt>Best day</dt><dd>" + dayLine(agg.best) + "</dd>" +
-      "<dt>Quietest day</dt><dd>" + dayLine(agg.worst) + "</dd>";
+      "<dt>" + t("Trading days") + "</dt><dd>" + num.format(agg.openDays) + "</dd>" +
+      "<dt>" + t("Average day") + "</dt><dd>" + eur2.format(agg.dayAvg) + "</dd>" +
+      "<dt>" + t("Best day") + "</dt><dd>" + dayLine(agg.best) + "</dd>" +
+      "<dt>" + t("Quietest day") + "</dt><dd>" + dayLine(agg.worst) + "</dd>";
     if(isYear){
-      const months = monthsOfYear(state.year).map(monthAgg).filter(a => a.openDays);
-      const bestM = months.slice().sort((a,b) => b.gross - a.gross)[0];
-      html += "<dt>Best month</dt><dd>" + (bestM ? bestM.label + " · " + eur.format(bestM.gross) : "—") + "</dd>";
+      const ms = monthsOfYear(state.year).map(m => ({m, a:monthAgg(m)})).filter(x => x.a.openDays);
+      const bestM = ms.slice().sort((x,y) => y.a.gross - x.a.gross)[0];
+      html += "<dt>" + t("Best month") + "</dt><dd>" + (bestM ? monthLabel(bestM.m) + " · " + eur.format(bestM.a.gross) : "—") + "</dd>";
     }
     html += '<div class="sep"></div>' +
-      "<dt>Sold-out events</dt><dd>" + num.format(agg.soldOutDays) + "</dd>" +
-      "<dt>Collected late</dt><dd>" + num.format(agg.ops.late) + "</dd>" +
-      "<dt>Not collected</dt><dd>" + num.format(agg.ops.noShow) + "</dd>" +
-      "<dt>Cancelled</dt><dd>" + num.format(agg.ops.cancelled) + "</dd>" +
-      "<dt>Refunds</dt><dd>" + eur2.format(agg.ops.refunds) + "</dd></dl>";
+      "<dt>" + t("Sold-out events") + "</dt><dd>" + num.format(agg.soldOutDays) + "</dd>" +
+      "<dt>" + t("Collected late") + "</dt><dd>" + num.format(agg.ops.late) + "</dd>" +
+      "<dt>" + t("Not collected") + "</dt><dd>" + num.format(agg.ops.noShow) + "</dd>" +
+      "<dt>" + t("Cancelled") + "</dt><dd>" + num.format(agg.ops.cancelled) + "</dd>" +
+      "<dt>" + t("Refunds") + "</dt><dd>" + eur2.format(agg.ops.refunds) + "</dd></dl>";
     el("factsBody").innerHTML = html;
   }
 
   /* ===================== heti mintázat / negyedévek ===================== */
   function renderBreakdown(agg, isYear){
     if(isYear){
-      el("breakTitle").textContent = "Quarters";
+      el("breakTitle").textContent = t("Quarters");
       const prevY = String(+state.year - 1);
       let html = '<div class="rows">';
       const maxQ = Math.max(1, ...[0,1,2,3].map(q => quarter(state.year, q).gross));
@@ -1227,16 +1355,16 @@
         html += '<div class="row"><span class="name">Q' + (q+1) + '</span><span class="val">' +
           (a.gross > 0 ? eur2.format(a.gross) : "—") + "</span>" +
           '<div class="track"><i style="width:' + (a.gross/maxQ*100).toFixed(1) + '%;background:var(--mag)"></i></div>' +
-          '<div class="sub"><span>' + (a.openDays ? num.format(a.orders) + " orders" : "no trading") + "</span>" +
-          '<span style="margin-left:auto">' + (diff == null ? "vs " + prevY + ": —" :
-            "vs " + prevY + ": " + (diff > 0 ? "+" : "") + diff.toFixed(0) + "%") + "</span></div></div>";
+          '<div class="sub"><span>' + (a.openDays ? num.format(a.orders) + " " + t("orders") : t("no trading")) + "</span>" +
+          '<span style="margin-left:auto">' + t("vs") + " " + prevY + ": " +
+            (diff == null ? "—" : (diff > 0 ? "+" : "") + diff.toFixed(0) + "%") + "</span></div></div>";
       });
       el("breakBody").innerHTML = html + "</div>";
       el("breakHint").textContent = "";
       return;
     }
-    el("breakTitle").textContent = "Weekday pattern";
-    el("breakHint").textContent = "average per open day";
+    el("breakTitle").textContent = t("Weekday pattern");
+    el("breakHint").textContent = t("average per open day");
     const order = [2,3,4,5,6,0];
     const avgs = order.map(d => {
       const b = agg.byDow[d];
@@ -1248,7 +1376,7 @@
       html += '<div class="row"><span class="name">' + DOW[a.d] + '</span><span class="val">' +
         (a.n ? eur2.format(Math.round(a.avg*100)/100) : "—") + "</span>" +
         '<div class="track"><i style="width:' + (a.avg/max*100).toFixed(1) + '%;background:var(--mag)"></i></div>' +
-        '<div class="sub"><span>' + (a.n ? a.n + (a.n === 1 ? " day" : " days") : "no trading") + "</span></div></div>";
+        '<div class="sub"><span>' + (a.n ? a.n + " " + t(a.n === 1 ? "day" : "days") : t("no trading")) + "</span></div></div>";
     });
     el("breakBody").innerHTML = html + "</div>";
   }
@@ -1267,14 +1395,14 @@
     let comps;
     if(isYear){
       const py = String(+state.year - 1);
-      comps = [{label: "vs " + py + (running ? " (same period)" : ""),
+      comps = [{label: t("vs") + " " + py + (running ? " (" + t("same period") + ")" : ""),
                 data: running ? yearAggTo(py, TODAY.slice(5)) : yearAgg(py)}];
     }else{
       const pm = shiftMonth(state.month, -1), ly = shiftMonth(state.month, -12);
       comps = [
-        {label:"vs " + monthShort(pm) + (running ? " (1–" + dayLim + ")" : ""),
+        {label:t("vs") + " " + monthShort(pm) + (running ? " (1–" + dayLim + ")" : ""),
          data: running ? monthAggTo(pm, dayLim) : monthAgg(pm)},
-        {label:"vs " + monthShort(ly) + (running ? " (1–" + dayLim + ")" : ""),
+        {label:t("vs") + " " + monthShort(ly) + (running ? " (1–" + dayLim + ")" : ""),
          data: running ? monthAggTo(ly, dayLim) : monthAgg(ly)}
       ];
     }
@@ -1287,12 +1415,12 @@
         spark.push(a.openDays ? a.gross : null);
       }
     }
-    agg.closedNote = "No trading days";
+    agg.closedNote = t("No trading days");
     renderKpis(agg, comps, spark);
 
     /* fő diagram */
     if(isYear){
-      el("periodPlotTitle").textContent = "Month by month";
+      el("periodPlotTitle").textContent = t("Month by month");
       const ms = monthsOfYear(state.year);
       const aggs = ms.map(monthAgg);
       const items = aggs.map((a, i) => ({
@@ -1300,17 +1428,17 @@
         closed: !a.openDays,
         segs:[{v:a.channels.pos.gross, color:"var(--ch-pos)"}, {v:a.channels.pickup.gross, color:"var(--ch-pickup)"}],
         tip: a.openDays ? tipRows(MONTHS_FULL[i] + " " + state.year, [
-          {k:"In-store", v:eur2.format(a.channels.pos.gross), color:"var(--ch-pos)"},
-          {k:"Pickup", v:eur2.format(a.channels.pickup.gross), color:"var(--ch-pickup)"},
-          {k:"Total", v:eur2.format(a.gross)},
-          {k:"Orders", v:num.format(a.orders)}
-        ]) : tipRows(MONTHS_FULL[i] + " " + state.year, [{k:"No trading", v:"—"}])
+          {k:t("In-store"), v:eur2.format(a.channels.pos.gross), color:"var(--ch-pos)"},
+          {k:t("Pickup"), v:eur2.format(a.channels.pickup.gross), color:"var(--ch-pickup)"},
+          {k:t("Total"), v:eur2.format(a.gross)},
+          {k:t("Orders"), v:num.format(a.orders)}
+        ]) : tipRows(MONTHS_FULL[i] + " " + state.year, [{k:t("no trading"), v:"—"}])
       }));
       el("periodPlot").innerHTML = barChart({
         items, max:Math.max(1, ...aggs.map(a => a.gross)), tick: v => "€" + Math.round(v),
         height:186, gap:7, aria:"Monthly revenue by channel in " + state.year
       });
-      el("periodPlotHint").textContent = agg.openDays + " trading days" + (running ? " · year to date" : "");
+      el("periodPlotHint").textContent = agg.openDays + " " + t("trading days") + (running ? " · " + t("year to date") : "");
       let rows = "";
       aggs.forEach((a, i) => {
         if(!a.openDays) return;
@@ -1318,9 +1446,10 @@
           eur2.format(a.channels.pickup.gross) + "</td><td>" + eur2.format(a.gross) + "</td><td>" +
           num.format(a.orders) + "</td><td>" + eur2.format(a.aov) + "</td></tr>";
       });
-      el("periodTable").innerHTML = "<table><thead><tr><th>Month</th><th>In-store</th><th>Pickup</th><th>Total</th><th>Orders</th><th>Avg basket</th></tr></thead><tbody>" + rows + "</tbody></table>";
+      el("periodTable").innerHTML = "<table><thead><tr><th>" + t("Month") + "</th><th>" + t("In-store") + "</th><th>" + t("Pickup") +
+        "</th><th>" + t("Total") + "</th><th>" + t("Orders") + "</th><th>" + t("Avg basket") + "</th></tr></thead><tbody>" + rows + "</tbody></table>";
     }else{
-      el("periodPlotTitle").textContent = "Day by day";
+      el("periodPlotTitle").textContent = t("Day by day");
       const isos = daysOfMonth(state.month);
       const days = isos.map(getDay);
       const items = days.map((d, i) => {
@@ -1331,12 +1460,12 @@
           segs:[{v:d.closed ? 0 : d.channels.pos.gross, color:"var(--ch-pos)"},
                 {v:d.closed ? 0 : d.channels.pickup.gross, color:"var(--ch-pickup)"}],
           tip: d.closed
-            ? tipRows(shortDate(d.iso) + " " + DOW_S[d.dow], [{k: d.before ? "Not open yet" : "Closed", v:"—"}])
+            ? tipRows(shortDate(d.iso) + " " + DOW_S[d.dow], [{k: t(d.before ? "Not open yet" : "Closed"), v:"—"}])
             : tipRows(shortDate(d.iso) + " " + DOW_S[d.dow], [
-                {k:"In-store", v:eur2.format(d.channels.pos.gross), color:"var(--ch-pos)"},
-                {k:"Pickup", v:eur2.format(d.channels.pickup.gross), color:"var(--ch-pickup)"},
-                {k:"Total", v:eur2.format(d.gross)},
-                {k:"Orders", v:String(d.orders)}
+                {k:t("In-store"), v:eur2.format(d.channels.pos.gross), color:"var(--ch-pos)"},
+                {k:t("Pickup"), v:eur2.format(d.channels.pickup.gross), color:"var(--ch-pickup)"},
+                {k:t("Total"), v:eur2.format(d.gross)},
+                {k:t("Orders"), v:String(d.orders)}
               ])
         };
       });
@@ -1344,10 +1473,10 @@
       const avg = open.length ? open.reduce((x,d) => x + d.gross, 0)/open.length : 0;
       el("periodPlot").innerHTML = barChart({
         items, max:Math.max(1, ...open.map(d => d.gross)), tick: v => "€" + Math.round(v),
-        height:186, gap:3, avg, avgLabel:"avg " + eur.format(avg),
+        height:186, gap:3, avg, avgLabel:t("avg") + " " + eur.format(avg),
         aria:"Daily revenue by channel in " + monthLabel(state.month)
       });
-      el("periodPlotHint").textContent = agg.openDays + " trading days" + (running ? " · month to date" : "");
+      el("periodPlotHint").textContent = agg.openDays + " " + t("trading days") + (running ? " · " + t("month to date") : "");
       let rows = "";
       days.forEach(d => {
         if(d.closed) return;
@@ -1355,10 +1484,11 @@
           "</td><td>" + eur2.format(d.channels.pickup.gross) + "</td><td>" + eur2.format(d.gross) +
           "</td><td>" + d.orders + "</td><td>" + eur2.format(d.aov) + "</td></tr>";
       });
-      el("periodTable").innerHTML = "<table><thead><tr><th>Day</th><th>In-store</th><th>Pickup</th><th>Total</th><th>Orders</th><th>Avg basket</th></tr></thead><tbody>" + rows + "</tbody></table>";
+      el("periodTable").innerHTML = "<table><thead><tr><th>" + t("Day") + "</th><th>" + t("In-store") + "</th><th>" + t("Pickup") +
+        "</th><th>" + t("Total") + "</th><th>" + t("Orders") + "</th><th>" + t("Avg basket") + "</th></tr></thead><tbody>" + rows + "</tbody></table>";
     }
 
-    el("cmpTitle").textContent = isYear ? "Months of " + state.year : "Months compared";
+    el("cmpTitle").textContent = isYear ? tf("Months of {0}", state.year) : t("Months compared");
     renderCompare(isYear ? state.year : state.month.slice(0,4), isYear ? null : state.month);
     renderChannels(agg, "chanBody2");
     renderFacts(agg, isYear);
@@ -1370,14 +1500,14 @@
 
   function renderDayView(){
     const day = getDay(state.sel);
-    day.closedNote = day.before ? "Not open yet" : "Closed";
+    day.closedNote = t(day.before ? "Not open yet" : "Closed");
     const prev = getDay(shiftIso(day.iso, -7));
     const spark = [];
     for(let i = 13; i >= 0; i--){
       const d = getDay(shiftIso(day.iso, -i));
       spark.push(d.closed ? null : d.gross);
     }
-    renderKpis(day, [{label:"vs last " + DOW[day.dow], data:prev}], spark);
+    renderKpis(day, [{label:t("vs last") + " " + DOW[day.dow], data:prev}], spark);
     renderHourly(day);
     renderChannels(day, "chanBody");
     renderQueue(day);
@@ -1394,17 +1524,17 @@
     const curMonth = ym(state.today), curYear = state.today.slice(0,4);
     let label, atStart, atEnd;
     if(v === "day"){
-      label = state.sel === state.today ? "Today · " + DOW_S[dowOf(state.sel)] : longDate(state.sel) + " · " + DOW_S[dowOf(state.sel)];
+      label = (state.sel === state.today ? t("Today") : longDate(state.sel)) + " · " + DOW_S[dowOf(state.sel)];
       atStart = state.sel <= OPENED; atEnd = state.sel >= state.today;
-      el("todayBtn").textContent = "Today";
+      el("todayBtn").textContent = t("Today");
     }else if(v === "month"){
       label = monthLabel(state.month);
       atStart = state.month <= OPENED.slice(0,7); atEnd = state.month >= curMonth;
-      el("todayBtn").textContent = "This month";
+      el("todayBtn").textContent = t("This month");
     }else{
       label = state.year;
       atStart = state.year <= OPENED.slice(0,4); atEnd = state.year >= curYear;
-      el("todayBtn").textContent = "This year";
+      el("todayBtn").textContent = t("This year");
     }
     el("dateLabel").textContent = label;
     el("prevDay").disabled = atStart;
@@ -1416,20 +1546,20 @@
     const now = minutesNow();
     if(h && now >= h.from*60 && now < h.to*60){
       chip.className = "chip chip-open";
-      txt.textContent = "Open now · until " + h.to + ":00";
+      txt.textContent = tf("Open now · until {0}", h.to + ":00");
     }else{
       chip.className = "chip chip-closed";
       let next = state.today, guard = 0;
       do{ next = shiftIso(next, 1); guard++; } while(!hours(next) && guard < 8);
       const nh = hours(next);
       txt.textContent = h && now < h.from*60
-        ? "Closed · opens " + h.from + ":00"
-        : "Closed · " + DOW[dowOf(next)] + " " + (nh ? nh.from : 10) + ":00";
+        ? tf("Closed · opens {0}", h.from + ":00")
+        : tf("Closed · {0} {1}", DOW[dowOf(next)], (nh ? nh.from : 10) + ":00");
     }
 
     const shown = state.shown;
     const live = shown ? (shown.period ? (shown.hasLive && !shown.hasDemo) : state.live.has(shown.iso)) : false;
-    el("srcChip").textContent = live ? "Live data" : "Demo data";
+    el("srcChip").textContent = live ? t("Live data") : t("Demo data");
     el("demoBanner").hidden = live;
   }
 
@@ -1504,9 +1634,9 @@
     }
     const btn = e.target.closest(".tbtn[data-table]");
     if(!btn) return;
-    const t = el(btn.dataset.table);
-    t.hidden = !t.hidden;
-    btn.textContent = t.hidden ? "Table" : "Chart";
+    const tbl = el(btn.dataset.table);
+    tbl.hidden = !tbl.hidden;
+    btn.textContent = tbl.hidden ? t("Table") : t("Chart");
   });
 
   /* tooltip */
@@ -1531,6 +1661,18 @@
   document.addEventListener("pointerleave", () => tip.classList.remove("on"));
   window.addEventListener("scroll", () => tip.classList.remove("on"), {passive:true});
 
+  /* nyelvváltó — alapértelmezés angol, a választást megjegyzi */
+  el("langSeg").addEventListener("click", e => {
+    const b = e.target.closest("[data-lang]");
+    if(!b || b.dataset.lang === lang) return;
+    applyLang(b.dataset.lang);
+    try{ localStorage.setItem("cinnery-lang", lang); }catch(_){}
+    render();
+  });
+
+  let saved = "en";
+  try{ saved = localStorage.getItem("cinnery-lang") || "en"; }catch(_){}
+  applyLang(saved);
   render();
 })();
 </script>
