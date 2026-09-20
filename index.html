@@ -1,0 +1,1538 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Cinnery bakery trading overview: day, month and year.">
+<link rel="icon" href="roll.svg" type="image/svg+xml">
+<style>
+  :root{color-scheme:light; padding-top:env(safe-area-inset-top, 0px); padding-bottom:env(safe-area-inset-bottom, 0px)}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none !important}
+</style>
+<title>Cinnery Counter</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#FAF7F7; --surface:#FFFFFF; --surface-2:#F5F0F2; --surface-3:#EFE7EB;
+    --line:#E8DDE2; --line-strong:#D4C2CB;
+    --ink:#2B1F26; --ink-2:#6E5B65; --ink-3:#9B8891;
+    --brand:#614051; --brand-soft:#F0A3AF;
+    --mark-bg:#F0A3AF; --mark-ink:#614051;
+    --ch-pos:#4a3aa7; --ch-pickup:#e87ba4;
+    --mag:#7C5A6D; --mag-soft:#E4D5DC;
+    --good:#14733F; --good-bg:#E4F1EA;
+    --warn:#8F5A06; --warn-bg:#F7EBDA;
+    --bad:#B93B31; --bad-bg:#F8E5E3;
+    --shadow:0 1px 2px rgba(43,31,38,.05), 0 8px 24px -16px rgba(43,31,38,.28);
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#161114; --surface:#1E1820; --surface-2:#271F27; --surface-3:#312630;
+      --line:#382C35; --line-strong:#4E3E49;
+      --ink:#F8F1F4; --ink-2:#BFACB6; --ink-3:#8C7A85;
+      --brand:#F0A3AF; --brand-soft:#F0A3AF;
+      --mark-bg:#F0A3AF; --mark-ink:#241A20;
+      --ch-pos:#9085e9; --ch-pickup:#d55181;
+      --mag:#C09AAE; --mag-soft:#3B2E37;
+      --good:#5FC38E; --good-bg:#17301F;
+      --warn:#DDA23F; --warn-bg:#32250F;
+      --bad:#E97F76; --bad-bg:#331C1A;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#161114; --surface:#1E1820; --surface-2:#271F27; --surface-3:#312630;
+    --line:#382C35; --line-strong:#4E3E49;
+    --ink:#F8F1F4; --ink-2:#BFACB6; --ink-3:#8C7A85;
+    --brand:#F0A3AF; --brand-soft:#F0A3AF;
+    --mark-ink:#241A20; --mark-bg:#F0A3AF;
+    --ch-pos:#9085e9; --ch-pickup:#d55181;
+    --mag:#C09AAE; --mag-soft:#3B2E37;
+    --good:#5FC38E; --good-bg:#17301F;
+    --warn:#DDA23F; --warn-bg:#32250F;
+    --bad:#E97F76; --bad-bg:#331C1A;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size:14px; line-height:1.45; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{margin:0; text-wrap:balance}
+  button{font:inherit; color:inherit}
+  :focus-visible{outline:2px solid var(--ch-pos); outline-offset:2px; border-radius:6px}
+  .num{font-variant-numeric:tabular-nums}
+  .mono{font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric:tabular-nums}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky; top:env(safe-area-inset-top, 0px); z-index:30;
+    background:color-mix(in srgb, var(--surface) 88%, transparent);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  .topbar-in{
+    max-width:1240px; margin:0 auto; padding-inline:16px; padding-block:10px;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:center; gap:9px; margin-right:auto}
+  .mark{width:30px; height:30px; flex:none}
+  .brand-name{font-family:Fredoka, ui-rounded, system-ui, sans-serif; font-weight:600; font-size:19px; letter-spacing:.2px; color:var(--brand); line-height:1}
+  .brand-sub{font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3); line-height:1; margin-top:3px}
+  .datenav{display:flex; align-items:center; gap:4px; background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:3px}
+  .datenav button{
+    border:0; background:transparent; cursor:pointer; border-radius:999px;
+    padding:5px 9px; color:var(--ink-2); display:flex; align-items:center;
+  }
+  .datenav button:hover:not(:disabled){background:var(--surface-3); color:var(--ink)}
+  .datenav button:disabled{opacity:.35; cursor:default}
+  .datenav .today{padding-inline:12px; font-weight:600; font-size:12.5px}
+  #dateLabel{padding:0 8px; font-weight:600; min-width:124px; text-align:center; font-variant-numeric:tabular-nums}
+  .chip{
+    display:inline-flex; align-items:center; gap:6px; border-radius:999px;
+    padding:4px 10px; font-size:12px; font-weight:600; white-space:nowrap;
+    border:1px solid transparent;
+  }
+  .chip .dot{width:7px; height:7px; border-radius:50%; background:currentColor; flex:none}
+  .chip-open{background:var(--good-bg); color:var(--good)}
+  .chip-closed{background:var(--surface-2); color:var(--ink-3); border-color:var(--line)}
+  .chip-src{background:var(--surface-2); color:var(--ink-2); border-color:var(--line)}
+
+  .banner{
+    background:repeating-linear-gradient(135deg, var(--surface-3) 0 10px, var(--surface-2) 10px 20px);
+    border-bottom:1px solid var(--line); color:var(--ink-2); font-size:12.5px;
+  }
+  .banner-in{max-width:1240px; margin:0 auto; padding-inline:16px; padding-block:7px; display:flex; gap:8px; align-items:baseline; flex-wrap:wrap}
+  .banner b{color:var(--ink)}
+
+  /* ---------- layout ---------- */
+  .wrap{max-width:1240px; margin:0 auto; padding-inline:16px; padding-block:18px 48px}
+  .grid{display:grid; grid-template-columns:repeat(12, 1fr); gap:14px}
+  .c3{grid-column:span 3} .c4{grid-column:span 4} .c5{grid-column:span 5}
+  .c7{grid-column:span 7} .c8{grid-column:span 8} .c12{grid-column:span 12}
+  @media (max-width:1000px){
+    .c3{grid-column:span 6} .c4{grid-column:span 6} .c5{grid-column:span 12}
+    .c7{grid-column:span 12} .c8{grid-column:span 12}
+  }
+  @media (max-width:620px){ .c3,.c4,.c5,.c7,.c8{grid-column:span 12} }
+
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:15px 16px 16px; box-shadow:var(--shadow); min-width:0;
+  }
+  .card-head{display:flex; align-items:baseline; gap:10px; margin-bottom:12px}
+  .card-head h2{font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2)}
+  .card-head .hint{font-size:12px; color:var(--ink-3); margin-left:auto; text-align:right}
+  .tbtn{
+    margin-left:auto; border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
+    border-radius:999px; padding:3px 10px; font-size:11.5px; font-weight:500; cursor:pointer;
+  }
+  .tbtn:hover{color:var(--ink); border-color:var(--line-strong)}
+  .card-head .tbtn + .hint{margin-left:0}
+
+  /* ---------- stat tiles ---------- */
+  .tile{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:14px 16px 12px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:2px; min-width:0;
+  }
+  .tile .label{font-size:11.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3)}
+  .tile .value{font-size:29px; font-weight:600; letter-spacing:-.6px; font-variant-numeric:tabular-nums; line-height:1.15}
+  .tile .value.lead{color:var(--brand)}
+  .tile .foot{display:flex; flex-direction:column; align-items:flex-start; gap:1px; margin-top:5px; min-height:20px}
+  .tile .foot .grp{display:inline-flex; align-items:baseline; gap:6px; flex-wrap:wrap}
+  .delta{font-size:12px; font-weight:600; font-variant-numeric:tabular-nums; display:inline-flex; align-items:center; gap:3px}
+  .delta.up{color:var(--good)} .delta.down{color:var(--bad)} .delta.flat{color:var(--ink-3)}
+  .delta .cap{font-weight:400; color:var(--ink-3)}
+  .spark{display:block; width:100%; height:26px; margin-top:6px}
+
+  /* ---------- bar chart (hourly / trend) ---------- */
+  .plot{position:relative; padding-left:44px}
+  .plot-inner{position:relative; height:var(--plot-h, 170px)}
+  .gridline{position:absolute; left:0; right:0; border-top:1px solid var(--line); pointer-events:none}
+  .gridline.base{border-top-color:var(--line-strong)}
+  .gridline span{
+    position:absolute; right:calc(100% + 8px); top:-.62em; font-size:10.5px; color:var(--ink-3);
+    font-variant-numeric:tabular-nums; white-space:nowrap;
+  }
+  .bars{position:absolute; inset:0; display:flex; align-items:flex-end; gap:var(--bar-gap, 6px)}
+  .bar{flex:1 1 0; min-width:0; height:100%; display:flex; flex-direction:column-reverse; justify-content:flex-start; gap:2px; cursor:default; position:relative}
+  .bar .seg{border-radius:2px; min-height:2px}
+  .bar .seg.top{border-radius:4px 4px 2px 2px}
+  .bar:hover .seg{filter:brightness(1.06)}
+  .bar.closed{align-items:center; justify-content:flex-start}
+  .bar .closed-mark{width:100%; height:6px; border-radius:3px; background:repeating-linear-gradient(135deg, var(--line-strong) 0 3px, transparent 3px 6px)}
+  .bar .peak{
+    position:absolute; left:50%; transform:translateX(-50%);
+    font-size:10.5px; font-weight:600; color:var(--ink-2); white-space:nowrap; font-variant-numeric:tabular-nums;
+  }
+  .xaxis{display:flex; gap:var(--bar-gap, 6px); margin-top:7px}
+  .xaxis span{flex:1 1 0; min-width:0; text-align:center; font-size:10.5px; color:var(--ink-3); font-variant-numeric:tabular-nums; overflow:hidden}
+  .xaxis span.hi{color:var(--ink-2); font-weight:600}
+  .avgline{position:absolute; left:0; right:0; border-top:1px dashed var(--ch-pos); pointer-events:none}
+  .avgline span{position:absolute; right:0; top:-1.5em; font-size:10px; color:var(--ch-pos); font-weight:600; background:var(--surface); padding:0 4px; border-radius:4px}
+
+  /* ---------- nézetváltó ---------- */
+  .seg{display:flex; background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:3px; gap:2px}
+  .seg button{border:0; background:transparent; border-radius:999px; padding:5px 13px; font-size:12.5px; font-weight:600; color:var(--ink-3); cursor:pointer}
+  .seg button.on{background:var(--surface); color:var(--ink); box-shadow:0 1px 2px rgba(43,31,38,.12)}
+  .seg button:hover:not(.on){color:var(--ink-2)}
+
+  /* ---------- csoportos oszlopok (év/év összevetés) ---------- */
+  button.bar{border:0; background:none; padding:0; font:inherit; cursor:pointer}
+  .bar.group{flex-direction:row; align-items:flex-end; justify-content:center; gap:2px}
+  .bar.group > i{display:block; width:42%; max-width:22px; border-radius:3px 3px 2px 2px; min-height:2px}
+  .bar.group > i.prev{background:var(--mag-soft); border:1px solid var(--line-strong)}
+  .bar.group > i.prev.none{background:var(--line); border:0}
+  .bar.group > i.cur{background:var(--mag)}
+  .bar.group.sel > i.cur{background:var(--brand)}
+  .bar.group:hover > i.cur{filter:brightness(1.08)}
+  .bar.group:focus-visible{outline:2px solid var(--ch-pos); outline-offset:2px}
+
+  .legend{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:10px}
+  .legend i{width:9px; height:9px; border-radius:3px; display:inline-block; flex:none}
+  .legend span{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--ink-2)}
+
+  /* ---------- rows / bars ---------- */
+  .rows{display:flex; flex-direction:column; gap:10px}
+  .row{display:grid; grid-template-columns:1fr auto; gap:3px 10px; align-items:baseline}
+  .row .name{font-size:13px; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .row .val{font-size:13px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .row .sub{grid-column:1/-1; display:flex; gap:8px; align-items:center; font-size:11.5px; color:var(--ink-3)}
+  .track{grid-column:1/-1; height:7px; border-radius:4px; background:var(--surface-3); overflow:hidden}
+  .track > i{display:block; height:100%; border-radius:4px}
+
+  .kv{display:grid; grid-template-columns:1fr auto; gap:9px 12px; align-items:baseline}
+  .kv dt{font-size:12.5px; color:var(--ink-2); min-width:0}
+  .kv dd{margin:0; font-size:14px; font-weight:600; font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap}
+  .kv dd small{font-weight:400; color:var(--ink-3); font-size:11.5px}
+  .kv .sep{grid-column:1/-1; border-top:1px solid var(--line); margin:2px 0}
+
+  /* ---------- queue ---------- */
+  .queue{display:flex; flex-direction:column; gap:0}
+  .q{display:grid; grid-template-columns:auto 1fr auto; gap:2px 10px; padding:9px 0; border-bottom:1px solid var(--line); align-items:center}
+  .q:last-child{border-bottom:0}
+  .q .time{font-family:"IBM Plex Mono", monospace; font-size:13px; font-weight:500; font-variant-numeric:tabular-nums}
+  .q .items{font-size:12.5px; color:var(--ink-2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0}
+  .q .ref{grid-column:1; font-size:10.5px; color:var(--ink-3); font-family:"IBM Plex Mono", monospace}
+  .q .amount{grid-column:3; grid-row:2; font-size:11.5px; color:var(--ink-3); font-variant-numeric:tabular-nums; text-align:right}
+  .st{border-radius:999px; padding:3px 9px; font-size:11px; font-weight:600; white-space:nowrap}
+  .st-sched{background:var(--surface-2); color:var(--ink-2)}
+  .st-prep{background:var(--warn-bg); color:var(--warn)}
+  .st-ready{background:var(--good-bg); color:var(--good)}
+  .st-done{background:var(--surface-2); color:var(--ink-3)}
+  .st-miss{background:var(--bad-bg); color:var(--bad)}
+
+  /* ---------- products ---------- */
+  .cat{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); margin:14px 0 8px}
+  .cat:first-child{margin-top:0}
+  .prod{display:grid; grid-template-columns:1fr 58px 42px; gap:4px 10px; align-items:center; padding:5px 0}
+  .prod .pname{font-size:13px; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:flex; align-items:center; gap:7px}
+  .prod .ptrack{grid-column:1/-1; height:6px; border-radius:3px; background:var(--surface-3); overflow:hidden}
+  .prod .ptrack > i{display:block; height:100%; border-radius:3px; background:var(--mag)}
+  .prod .pqty{font-size:13px; font-weight:600; text-align:right; font-variant-numeric:tabular-nums}
+  .prod .pshare{font-size:11.5px; color:var(--ink-3); text-align:right; font-variant-numeric:tabular-nums}
+  .soldout{font-size:10px; font-weight:600; color:var(--warn); background:var(--warn-bg); border-radius:4px; padding:1px 5px; white-space:nowrap; flex:none}
+
+  /* ---------- tables ---------- */
+  .tablewrap{overflow-x:auto; margin-top:12px; border-top:1px solid var(--line); padding-top:10px}
+  table{border-collapse:collapse; width:100%; font-size:12.5px}
+  th,td{text-align:right; padding:5px 8px; white-space:nowrap; font-variant-numeric:tabular-nums}
+  th:first-child, td:first-child{text-align:left}
+  thead th{font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-3); font-weight:600; border-bottom:1px solid var(--line)}
+  tbody tr:nth-child(even){background:var(--surface-2)}
+  tbody tr.sel{background:var(--surface-3); font-weight:600}
+  td.pos{color:var(--good)} td.neg{color:var(--bad)} td.mut{color:var(--ink-3)}
+
+  /* ---------- misc ---------- */
+  .empty{display:flex; flex-direction:column; gap:6px; align-items:center; justify-content:center; padding:30px 10px; text-align:center; color:var(--ink-3)}
+  .empty strong{color:var(--ink-2); font-size:14px}
+  .note{font-size:12px; color:var(--ink-3); margin-top:10px}
+  footer{max-width:1240px; margin:0 auto; padding-inline:16px; padding-block:0 40px; color:var(--ink-3); font-size:12px}
+  footer .fl{display:flex; gap:10px 18px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:14px}
+  footer b{color:var(--ink-2); font-weight:600}
+
+  #tip{
+    position:fixed; z-index:60; pointer-events:none; opacity:0; transition:opacity .09s ease;
+    background:var(--ink); color:var(--surface); border-radius:8px; padding:7px 10px; font-size:12px;
+    box-shadow:0 6px 20px -8px rgba(0,0,0,.5); max-width:240px;
+  }
+  #tip.on{opacity:1}
+  #tip .tt{font-weight:600; margin-bottom:3px}
+  #tip .tr{display:flex; justify-content:space-between; gap:14px; font-variant-numeric:tabular-nums}
+  #tip .tr i{width:8px; height:8px; border-radius:2px; display:inline-block; margin-right:5px}
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="var(--mark-bg)"/>
+        <path d="M27 16a11 11 0 1 0-11 11 8 8 0 1 0 8-8 5 5 0 1 0-5 5 2.2 2.2 0 1 0 2.2-2.2"
+              fill="none" stroke="var(--mark-ink)" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="brand-name">Cinnery</div>
+        <div class="brand-sub">Sales overview</div>
+      </div>
+    </div>
+    <div class="seg" id="viewSeg">
+      <button type="button" class="on" data-view="day">Day</button>
+      <button type="button" data-view="month">Month</button>
+      <button type="button" data-view="year">Year</button>
+    </div>
+    <div class="datenav">
+      <button id="prevDay" type="button" aria-label="Previous period">&#8249;</button>
+      <span id="dateLabel" class="num">—</span>
+      <button id="nextDay" type="button" aria-label="Next period">&#8250;</button>
+      <button id="todayBtn" class="today" type="button">Today</button>
+    </div>
+    <span class="chip chip-closed" id="openChip"><span class="dot"></span><span id="openTxt">—</span></span>
+    <span class="chip chip-src" id="srcChip">Demo data</span>
+  </div>
+</header>
+
+<div class="banner" id="demoBanner">
+  <div class="banner-in">
+    <b>Demo data.</b>
+    <span>Lightspeed is not connected yet — the figures are generated examples, the layout is the real one.</span>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="grid" style="margin-bottom:14px">
+    <div class="tile c3">
+      <div class="label">Revenue</div>
+      <div class="value lead" id="kpiRev">—</div>
+      <div class="foot" id="kpiRevDelta"></div>
+      <svg class="spark" id="spark" viewBox="0 0 200 26" preserveAspectRatio="none" role="img" aria-label="Revenue trend"></svg>
+    </div>
+    <div class="tile c3">
+      <div class="label">Orders</div>
+      <div class="value" id="kpiOrders">—</div>
+      <div class="foot" id="kpiOrdersDelta"></div>
+    </div>
+    <div class="tile c3">
+      <div class="label">Average basket</div>
+      <div class="value" id="kpiAov">—</div>
+      <div class="foot" id="kpiAovDelta"></div>
+    </div>
+    <div class="tile c3">
+      <div class="label">Cinnamon rolls sold</div>
+      <div class="value" id="kpiRolls">—</div>
+      <div class="foot" id="kpiRollsDelta"></div>
+    </div>
+  </div>
+
+  <div class="grid" id="dayBoard">
+    <section class="card c8" id="hourCard">
+      <div class="card-head">
+        <h2>Through the day</h2>
+        <button class="tbtn" type="button" data-table="hourTable">Table</button>
+        <span class="hint" id="hourHint"></span>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--ch-pos)"></i>In-store (POS)</span>
+        <span><i style="background:var(--ch-pickup)"></i>Pickup pre-orders</span>
+      </div>
+      <div id="hourPlot"></div>
+      <div class="tablewrap" id="hourTable" hidden></div>
+    </section>
+
+    <section class="card c4" id="chanCard">
+      <div class="card-head"><h2>Channels</h2></div>
+      <div id="chanBody"></div>
+    </section>
+
+    <section class="card c4" id="queueCard">
+      <div class="card-head"><h2>Pickup orders</h2><span class="hint" id="queueHint"></span></div>
+      <div id="queueBody"></div>
+    </section>
+
+    <section class="card c4" id="opsCard">
+      <div class="card-head"><h2>Fulfilment</h2></div>
+      <div id="opsBody"></div>
+    </section>
+
+    <section class="card c4" id="payCard">
+      <div class="card-head"><h2>Payments</h2><span class="hint">card only</span></div>
+      <div id="payBody"></div>
+    </section>
+
+    <section class="card c7" id="prodCard">
+      <div class="card-head"><h2>Products</h2><span class="hint" id="prodHint"></span></div>
+      <div id="prodBody"></div>
+    </section>
+
+    <section class="card c5" id="trendCard">
+      <div class="card-head">
+        <h2>Last 14 days</h2>
+        <button class="tbtn" type="button" data-table="trendTable">Table</button>
+      </div>
+      <div id="trendPlot"></div>
+      <div class="tablewrap" id="trendTable" hidden></div>
+    </section>
+  </div>
+
+  <div class="grid" id="periodBoard" hidden>
+    <section class="card c8">
+      <div class="card-head">
+        <h2 id="periodPlotTitle">Day by day</h2>
+        <button class="tbtn" type="button" data-table="periodTable">Table</button>
+        <span class="hint" id="periodPlotHint"></span>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--ch-pos)"></i>In-store (POS)</span>
+        <span><i style="background:var(--ch-pickup)"></i>Pickup pre-orders</span>
+      </div>
+      <div id="periodPlot"></div>
+      <div class="tablewrap" id="periodTable" hidden></div>
+    </section>
+
+    <section class="card c4">
+      <div class="card-head"><h2>Channels</h2></div>
+      <div id="chanBody2"></div>
+    </section>
+
+    <section class="card c12">
+      <div class="card-head">
+        <h2 id="cmpTitle">Months compared</h2>
+        <span class="hint" id="cmpHint"></span>
+      </div>
+      <div class="legend" id="cmpLegend"></div>
+      <div id="cmpPlot"></div>
+      <div class="tablewrap" id="cmpTable"></div>
+    </section>
+
+    <section class="card c4">
+      <div class="card-head"><h2 id="factsTitle">Period facts</h2></div>
+      <div id="factsBody"></div>
+    </section>
+
+    <section class="card c4">
+      <div class="card-head"><h2 id="breakTitle">Weekday pattern</h2><span class="hint" id="breakHint"></span></div>
+      <div id="breakBody"></div>
+    </section>
+
+    <section class="card c4">
+      <div class="card-head"><h2>Payments</h2><span class="hint">card only</span></div>
+      <div id="payBody2"></div>
+    </section>
+
+    <section class="card c12">
+      <div class="card-head"><h2>Products</h2><span class="hint" id="prodHint2"></span></div>
+      <div id="prodBody2"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="fl">
+    <span><b>Sources:</b> Lightspeed Restaurant K Series (POS) · Order Anywhere (pickup)</span>
+    <span><b>Opening hours:</b> Mon closed · Tue–Sat 10–18 · Sun 12–17 (Europe/Amsterdam)</span>
+    <span style="margin-left:auto">Built by sadrobot</span>
+  </div>
+</footer>
+
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ===================== helpers ===================== */
+  const TZ = "Europe/Amsterdam";
+  const eur = new Intl.NumberFormat("en-GB", {style:"currency", currency:"EUR", currencyDisplay:"narrowSymbol", minimumFractionDigits:0, maximumFractionDigits:0});
+  const eur2 = new Intl.NumberFormat("en-GB", {style:"currency", currency:"EUR", currencyDisplay:"narrowSymbol", minimumFractionDigits:2, maximumFractionDigits:2});
+  const num = new Intl.NumberFormat("en-GB");
+  const DOW = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const DOW_S = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const el = id => document.getElementById(id);
+
+  function isoToday(){
+    return new Intl.DateTimeFormat("en-CA", {timeZone:TZ, year:"numeric", month:"2-digit", day:"2-digit"}).format(new Date());
+  }
+  function minutesNow(){
+    const p = new Intl.DateTimeFormat("en-GB", {timeZone:TZ, hour:"2-digit", minute:"2-digit", hour12:false}).format(new Date()).split(":");
+    return (+p[0])*60 + (+p[1]);
+  }
+  function dowOf(iso){ return new Date(iso + "T12:00:00Z").getUTCDay(); }
+  function shiftIso(iso, days){
+    const d = new Date(iso + "T12:00:00Z");
+    d.setUTCDate(d.getUTCDate() + days);
+    return d.toISOString().slice(0,10);
+  }
+  function longDate(iso){
+    const d = new Date(iso + "T12:00:00Z");
+    return d.getUTCDate() + " " + MON[d.getUTCMonth()] + " " + d.getUTCFullYear();
+  }
+  function shortDate(iso){
+    const d = new Date(iso + "T12:00:00Z");
+    return d.getUTCDate() + " " + MON[d.getUTCMonth()];
+  }
+  const hhmm = m => String(Math.floor(m/60)).padStart(2,"0") + ":" + String(Math.round(m%60)).padStart(2,"0");
+
+  /* Nyitvatartás: hétfő zárva, K–Szo 10–18, V 12–17 */
+  function hours(iso){
+    const d = dowOf(iso);
+    if(d === 1) return null;
+    return d === 0 ? {from:12, to:17} : {from:10, to:18};
+  }
+
+  function mulberry32(a){
+    return function(){
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function seedOf(s){ let h = 2166136261; for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function pick(rnd, list, key){
+    let total = 0; for(const it of list) total += it[key];
+    let r = rnd() * total;
+    for(const it of list){ r -= it[key]; if(r <= 0) return it; }
+    return list[list.length-1];
+  }
+
+  /* ===================== katalógus ===================== */
+  const PRODUCTS = [
+    {id:"r-classic",   name:"Classic",                 cat:"roll",   price:4.20, w:0.26},
+    {id:"r-biscoff",   name:"Biscoff",                 cat:"roll",   price:4.80, w:0.19},
+    {id:"r-redvelvet", name:"Red Velvet",              cat:"roll",   price:4.80, w:0.16},
+    {id:"r-caramel",   name:"Salted Caramel Pecan",    cat:"roll",   price:5.00, w:0.15},
+    {id:"r-cnc",       name:"Cookies & Cream",         cat:"roll",   price:4.80, w:0.13},
+    {id:"r-pistachio", name:"Pistachio",               cat:"roll",   price:5.20, w:0.11},
+    {id:"c-choc",      name:"Classic Chocolate Chip",  cat:"cookie", price:3.00, w:0.30},
+    {id:"c-biscoff",   name:"Biscoff",                 cat:"cookie", price:3.40, w:0.21},
+    {id:"c-cnc",       name:"Cookies & Cream",         cat:"cookie", price:3.40, w:0.17},
+    {id:"c-oatmeal",   name:"Oatmeal Raisin & Walnut", cat:"cookie", price:3.20, w:0.16},
+    {id:"c-pistachio", name:"Pistachio",               cat:"cookie", price:3.60, w:0.16},
+    {id:"d-capp",      name:"Cappuccino",              cat:"drink",  price:3.40, w:0.26},
+    {id:"d-filter",    name:"Filter coffee",           cat:"drink",  price:2.80, w:0.22},
+    {id:"d-latte",     name:"Latte",                   cat:"drink",  price:3.60, w:0.20},
+    {id:"d-choco",     name:"Hot chocolate",           cat:"drink",  price:3.60, w:0.14},
+    {id:"d-chai",      name:"Chai latte",              cat:"drink",  price:3.80, w:0.10},
+    {id:"d-tea",       name:"Tea",                     cat:"drink",  price:2.60, w:0.08}
+  ];
+  const BY_ID = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
+  const ROLLS = PRODUCTS.filter(p => p.cat === "roll");
+  const COOKIES = PRODUCTS.filter(p => p.cat === "cookie");
+  const DRINKS = PRODUCTS.filter(p => p.cat === "drink");
+  const CAT_LABEL = {roll:"Cinnamon rolls", cookie:"Cookies", drink:"Drinks"};
+
+  /* ===================== demó nap generálása ===================== */
+  const TODAY = isoToday();
+  const DAY_CACHE = new Map();
+  const BASE_ORDERS = {0:102, 2:74, 3:81, 4:93, 5:121, 6:154};
+  const OPENED = "2025-09-02";           /* az első nyitvatartási nap */
+  /* Groningen diákváros: szemeszterkezdés a csúcs, nyár üres */
+  const SEASON = [0.92,1.05,1.08,1.04,0.98,0.85,0.70,0.78,1.18,1.12,1.06,0.95];
+  function growth(iso){
+    const y = +iso.slice(0,4), m = +iso.slice(5,7);
+    const months = (y - 2025)*12 + (m - 9);
+    return Math.pow(1.012, Math.max(0, months));
+  }
+  const HOUR_W = {
+    weekday:[0.06,0.08,0.13,0.12,0.12,0.17,0.17,0.15],
+    sunday:[0.19,0.20,0.22,0.22,0.17]
+  };
+
+  function genDay(iso){
+    if(DAY_CACHE.has(iso)) return DAY_CACHE.get(iso);
+    const dow = dowOf(iso);
+    const h = hours(iso);
+    if(!h || iso < OPENED || iso > TODAY){
+      const shut = {iso, dow, closed:true, before: iso < OPENED, future: iso > TODAY, demo:true};
+      DAY_CACHE.set(iso, shut);
+      return shut;
+    }
+    const rnd = mulberry32(seedOf(iso));
+    const slots = [];
+    for(let x = h.from; x < h.to; x++) slots.push(x);
+    const weights = dow === 0 ? HOUR_W.sunday : HOUR_W.weekday;
+
+    const season = SEASON[+iso.slice(5,7) - 1];
+    const n = Math.max(12, Math.round(BASE_ORDERS[dow] * season * growth(iso) * (0.88 + rnd()*0.24)));
+    const pickupShare = 0.14 + rnd()*0.10;
+
+    /* aznap sütött mennyiség csigánként — ebből jön a "elfogyott" idő */
+    const rollDemand = n * 1.62;
+    const baked = {}, left = {}, soldOutAt = {};
+    for(const r of ROLLS){
+      baked[r.id] = Math.max(8, Math.round(rollDemand * r.w * (0.92 + rnd()*0.42)));
+      left[r.id] = baked[r.id];
+    }
+
+    const hourly = {}, prodQty = {}, prodRev = {};
+    for(const s of slots) hourly[s] = {pos:0, pickup:0, posOrders:0, pickupOrders:0};
+    const ch = {pos:{orders:0, gross:0, items:0}, pickup:{orders:0, gross:0, items:0}};
+    const pay = {pin:0, credit:0, ideal:0};
+    const queue = [];
+    let firstMin = Infinity, lastMin = -Infinity;
+
+    const hourPick = slots.map((s,k) => ({s, w:weights[k] || 0.1}));
+    for(let i = 0; i < n; i++){
+      const hIdx = pick(rnd, hourPick, "w").s;
+      const minute = Math.floor(rnd()*60);
+      const at = hIdx*60 + minute;
+      const channel = rnd() < pickupShare ? "pickup" : "pos";
+      const lines = [];
+
+      let rollCount = 1 + (rnd() < 0.44 ? 1 : 0) + (rnd() < 0.15 ? 1 : 0);
+      if(channel === "pickup" && rnd() < 0.45) rollCount++;
+      for(let k = 0; k < rollCount; k++){
+        const avail = ROLLS.filter(r => left[r.id] > 0);
+        if(!avail.length) break;
+        const r = pick(rnd, avail, "w");
+        left[r.id]--;
+        if(left[r.id] === 0) soldOutAt[r.id] = at;
+        lines.push(r);
+      }
+      if(rnd() < (channel === "pickup" ? 0.34 : 0.29)) lines.push(pick(rnd, COOKIES, "w"));
+      if(channel === "pos" && rnd() < 0.46) lines.push(pick(rnd, DRINKS, "w"));
+      if(!lines.length) continue;
+
+      let gross = 0;
+      for(const p of lines){
+        gross += p.price;
+        prodQty[p.id] = (prodQty[p.id] || 0) + 1;
+        prodRev[p.id] = (prodRev[p.id] || 0) + p.price;
+      }
+      gross = Math.round(gross*100)/100;
+
+      ch[channel].orders++;
+      ch[channel].gross += gross;
+      ch[channel].items += lines.length;
+      hourly[hIdx][channel] += gross;
+      hourly[hIdx][channel === "pos" ? "posOrders" : "pickupOrders"]++;
+      if(at < firstMin) firstMin = at;
+      if(at > lastMin) lastMin = at;
+
+      if(channel === "pickup"){
+        pay.ideal += gross;
+        const slotMin = hIdx*60 + Math.floor(minute/15)*15;
+        queue.push({at:slotMin, ref:"OA-" + (1200 + i), items:lines.map(p => p.name), gross, n:lines.length});
+      }else if(rnd() < 0.78){
+        pay.pin += gross;
+      }else{
+        pay.credit += gross;
+      }
+    }
+
+    for(const k of ["pos","pickup"]) ch[k].gross = Math.round(ch[k].gross*100)/100;
+    for(const k of Object.keys(pay)) pay[k] = Math.round(pay[k]*100)/100;
+
+    const orders = ch.pos.orders + ch.pickup.orders;
+    const gross = Math.round((ch.pos.gross + ch.pickup.gross)*100)/100;
+    const rollsSold = ROLLS.reduce((s,r) => s + (prodQty[r.id] || 0), 0);
+
+    const cancelled = rnd() < 0.55 ? Math.floor(rnd()*3) : 0;
+    const refunds = cancelled ? Math.round(cancelled * (6 + rnd()*9) * 100)/100 : 0;
+    const noShow = ch.pickup.orders > 12 && rnd() < 0.45 ? 1 : 0;
+
+    const day = {
+      iso, dow, demo:true, closed:false, hours:h, slots,
+      orders, gross,
+      aov: orders ? Math.round(gross/orders*100)/100 : 0,
+      rollsSold,
+      channels:{
+        pos:{...ch.pos, aov: ch.pos.orders ? Math.round(ch.pos.gross/ch.pos.orders*100)/100 : 0},
+        pickup:{...ch.pickup, aov: ch.pickup.orders ? Math.round(ch.pickup.gross/ch.pickup.orders*100)/100 : 0}
+      },
+      hourly, prodQty, prodRev, baked, left, soldOutAt, pay, queue,
+      ops:{
+        prepMedian: Math.round((5.2 + rnd()*3.4)*10)/10,
+        readyToCollect: Math.round((7 + rnd()*9)*10)/10,
+        late: Math.round(ch.pickup.orders * (0.02 + rnd()*0.06)),
+        noShow, cancelled, refunds,
+        firstMin: isFinite(firstMin) ? firstMin : null,
+        lastMin: isFinite(lastMin) ? lastMin : null
+      }
+    };
+    DAY_CACHE.set(iso, day);
+    return day;
+  }
+
+  /* ===================== hónap / év összesítés ===================== */
+  const MONTHS_FULL = ["January","February","March","April","May","June",
+                       "July","August","September","October","November","December"];
+  const AGG_CACHE = new Map();
+  const ym = iso => iso.slice(0,7);
+  const monthLabel = m => MONTHS_FULL[+m.slice(5,7) - 1] + " " + m.slice(0,4);
+  const monthShort = m => MON[+m.slice(5,7) - 1] + " " + m.slice(0,4);
+  function shiftMonth(m, k){
+    let y = +m.slice(0,4), mo = +m.slice(5,7) - 1 + k;
+    y += Math.floor(mo/12); mo = ((mo % 12) + 12) % 12;
+    return y + "-" + String(mo+1).padStart(2,"0");
+  }
+  function daysOfMonth(m){
+    const y = +m.slice(0,4), mo = +m.slice(5,7);
+    const last = new Date(Date.UTC(y, mo, 0)).getUTCDate();
+    const out = [];
+    for(let d = 1; d <= last; d++) out.push(m + "-" + String(d).padStart(2,"0"));
+    return out;
+  }
+  function monthsOfYear(y){
+    const out = [];
+    for(let i = 1; i <= 12; i++) out.push(y + "-" + String(i).padStart(2,"0"));
+    return out;
+  }
+  const r2 = v => Math.round(v*100)/100;
+
+  function aggregate(isos, key, label){
+    if(key && AGG_CACHE.has(key)) return AGG_CACHE.get(key);
+    const a = {
+      period:true, key, label, closed:false, demo:false, gross:0, orders:0, rollsSold:0, openDays:0,
+      channels:{pos:{orders:0, gross:0, items:0, aov:0}, pickup:{orders:0, gross:0, items:0, aov:0}},
+      prodQty:{}, soldOutCount:{}, pay:{pin:0, credit:0, ideal:0},
+      ops:{cancelled:0, refunds:0, late:0, noShow:0, prepMedian:0, readyToCollect:0},
+      best:null, worst:null, byDow:{}, days:[]
+    };
+    let prep = 0, rtc = 0;
+    isos.forEach(iso => {
+      const d = getDay(iso);
+      a.days.push(d);
+      if(d.closed) return;
+      if(!d.demo) a.hasLive = true; else a.hasDemo = true;
+      a.openDays++;
+      a.gross += d.gross; a.orders += d.orders; a.rollsSold += d.rollsSold;
+      ["pos","pickup"].forEach(k => {
+        a.channels[k].orders += d.channels[k].orders;
+        a.channels[k].gross += d.channels[k].gross;
+        a.channels[k].items += d.channels[k].items;
+      });
+      for(const id in d.prodQty) a.prodQty[id] = (a.prodQty[id] || 0) + d.prodQty[id];
+      for(const id in d.soldOutAt) a.soldOutCount[id] = (a.soldOutCount[id] || 0) + 1;
+      a.pay.pin += d.pay.pin; a.pay.credit += d.pay.credit; a.pay.ideal += d.pay.ideal;
+      a.ops.cancelled += d.ops.cancelled; a.ops.refunds += d.ops.refunds;
+      a.ops.late += d.ops.late; a.ops.noShow += d.ops.noShow;
+      prep += d.ops.prepMedian; rtc += d.ops.readyToCollect;
+      const b = a.byDow[d.dow] || (a.byDow[d.dow] = {sum:0, n:0});
+      b.sum += d.gross; b.n++;
+      if(!a.best || d.gross > a.best.gross) a.best = d;
+      if(!a.worst || d.gross < a.worst.gross) a.worst = d;
+    });
+    a.gross = r2(a.gross);
+    a.aov = a.orders ? r2(a.gross/a.orders) : 0;
+    a.dayAvg = a.openDays ? r2(a.gross/a.openDays) : 0;
+    ["pos","pickup"].forEach(k => {
+      const c = a.channels[k];
+      c.gross = r2(c.gross);
+      c.aov = c.orders ? r2(c.gross/c.orders) : 0;
+    });
+    for(const k of Object.keys(a.pay)) a.pay[k] = r2(a.pay[k]);
+    a.ops.refunds = r2(a.ops.refunds);
+    a.ops.prepMedian = a.openDays ? Math.round(prep/a.openDays*10)/10 : 0;
+    a.ops.readyToCollect = a.openDays ? Math.round(rtc/a.openDays*10)/10 : 0;
+    a.soldOutDays = Object.values(a.soldOutCount).reduce((x,y) => x+y, 0);
+    a.closed = a.openDays === 0;
+    if(key) AGG_CACHE.set(key, a);
+    return a;
+  }
+  const monthAgg = m => aggregate(daysOfMonth(m), "M" + m, monthLabel(m));
+  /* részidőszak: csak a hónap első `lim` napja */
+  const monthAggTo = (m, lim) =>
+    aggregate(daysOfMonth(m).filter(iso => +iso.slice(8) <= lim), "M" + m + "~" + lim, monthLabel(m));
+  const yearAggTo = (y, mmdd) =>
+    aggregate(monthsOfYear(y).flatMap(daysOfMonth).filter(iso => iso.slice(5) <= mmdd), "Y" + y + "~" + mmdd, String(y));
+  const yearAgg = y => aggregate(monthsOfYear(y).flatMap(daysOfMonth), "Y" + y, String(y));
+
+  /* ===================== élő napok ===================== */
+  /* Real trading days go here once a Lightspeed export exists: key = ISO date,
+     value = the same shape genDay() returns. A day listed here overrides the demo day
+     and the "Demo data" banner disappears while a live day is on screen. */
+  const LIVE_DAYS = {};
+
+  /* ===================== állapot ===================== */
+  const state = {
+    view: "day",            /* day | month | year */
+    today: TODAY,
+    sel: TODAY,
+    month: TODAY.slice(0,7),
+    year: TODAY.slice(0,4),
+    shown: null,
+    live: new Map(Object.entries(LIVE_DAYS).map(([iso, d]) => {
+      const day = Object.assign({}, d);
+      day.iso = day.iso || iso;
+      day.demo = false;
+      if(day.dow == null) day.dow = dowOf(day.iso);
+      return [day.iso, day];
+    })),
+    source: "demo"          /* demo | live | mixed */
+  };
+  state.source = state.live.size ? (state.live.has(state.sel) ? "live" : "mixed") : "demo";
+  const getDay = iso => state.live.get(iso) || genDay(iso);
+
+  /* ===================== számformázás ===================== */
+  function deltaHtml(cur, prev, fmt, caption){
+    if(prev == null || !isFinite(prev) || prev === 0){
+      return '<span class="delta flat">—</span><span class="delta cap">' + esc(caption) + "</span>";
+    }
+    const pct = (cur - prev) / prev * 100;
+    const cls = Math.abs(pct) < 1 ? "flat" : (pct > 0 ? "up" : "down");
+    const arrow = Math.abs(pct) < 1 ? "→" : (pct > 0 ? "↑" : "↓");
+    return '<span class="delta ' + cls + '">' + arrow + " " + Math.abs(pct).toFixed(0) + "%</span>" +
+           '<span class="delta cap">' + esc(caption) + " " + fmt(prev) + "</span>";
+  }
+  function niceMax(v){
+    if(!(v > 0)) return 1;
+    const raw = v/4;
+    const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    for(const s of [1,2,2.5,5,10]){ if(mag*s >= raw) return mag*s*4; }
+    return mag*10*4;
+  }
+
+  /* ===================== KPI csempék ===================== */
+  function renderKpis(cur, comps, spark){
+    const closed = cur.closed;
+    const tiles = [
+      ["kpiRev", "kpiRevDelta", d => d.gross, v => eur.format(v)],
+      ["kpiOrders", "kpiOrdersDelta", d => d.orders, v => num.format(v)],
+      ["kpiAov", "kpiAovDelta", d => d.aov, v => eur2.format(v)],
+      ["kpiRolls", "kpiRollsDelta", d => d.rollsSold, v => num.format(v)]
+    ];
+    tiles.forEach(([vId, dId, get, fmt], i) => {
+      el(vId).textContent = closed ? "—" : (i === 0 ? eur.format(cur.gross) : fmt(get(cur)));
+      if(closed){
+        el(dId).innerHTML = i === 0 ? '<span class="grp"><span class="delta cap">' + esc(cur.closedNote || "Closed") + "</span></span>" : "";
+        return;
+      }
+      el(dId).innerHTML = comps.map(c => '<span class="grp">' +
+        deltaHtml(get(cur), c.data && !c.data.closed ? get(c.data) : null, fmt, c.label) + "</span>").join("");
+    });
+    renderSpark(spark);
+  }
+
+  function renderSpark(pts){
+    const svg = el("spark");
+    if(!pts){ svg.innerHTML = ""; return; }
+    const vals = pts.filter(v => v != null);
+    if(vals.length < 2){ svg.innerHTML = ""; return; }
+    const max = Math.max(...vals), min = Math.min(...vals) * 0.85;
+    const last = pts.length - 1;
+    const x = i => (last ? i/last : 0) * 196 + 2;
+    const y = v => 23 - (v - min) / Math.max(1, max - min) * 20;
+    let d = "", open = false, lastV = null, lastI = 0;
+    pts.forEach((v, i) => {
+      if(v == null){ open = false; return; }
+      d += (open ? "L" : "M") + x(i).toFixed(1) + " " + y(v).toFixed(1) + " ";
+      open = true; lastV = v; lastI = i;
+    });
+    svg.innerHTML = '<path d="' + d.trim() + '" fill="none" stroke="var(--brand-soft)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+      (lastV != null ? '<circle cx="' + x(lastI).toFixed(1) + '" cy="' + y(lastV).toFixed(1) + '" r="2.8" fill="var(--brand)"/>' : "");
+  }
+
+  /* ===================== oszlopdiagram ===================== */
+  function barChart(opts){
+    const max = niceMax(opts.max);
+    const gap = opts.gap || 6;
+    let grid = "";
+    for(let i = 0; i <= 4; i++){
+      const pct = i*25;
+      grid += '<div class="gridline' + (i === 0 ? " base" : "") + '" style="bottom:' + pct + '%"><span>' +
+        esc(opts.tick(max*i/4)) + "</span></div>";
+    }
+    let bars = "", axis = "";
+    opts.items.forEach(it => {
+      if(it.closed){
+        bars += '<div class="bar closed" data-tip="' + esc(it.tip) + '"><div class="closed-mark"></div></div>';
+      }else{
+        let segs = "";
+        const live = it.segs.filter(s => s.v > 0);
+        live.forEach((s, k) => {
+          segs += '<div class="seg' + (k === live.length-1 ? " top" : "") + '" style="height:' +
+            (s.v/max*100).toFixed(2) + "%;background:" + s.color + '"></div>';
+        });
+        const tot = it.segs.reduce((a,s) => a + s.v, 0);
+        bars += '<div class="bar" data-tip="' + esc(it.tip) + '">' +
+          (it.peak ? '<span class="peak" style="bottom:calc(' + (tot/max*100).toFixed(2) + '% + 6px)">' + esc(it.peak) + "</span>" : "") +
+          segs + "</div>";
+      }
+      axis += '<span class="' + (it.hi ? "hi" : "") + '">' + esc(it.label) + "</span>";
+    });
+    let avg = "";
+    if(opts.avg != null && opts.avg > 0){
+      avg = '<div class="avgline" style="bottom:' + (opts.avg/max*100).toFixed(2) + '%"><span>' + esc(opts.avgLabel) + "</span></div>";
+    }
+    return '<div class="plot" style="--plot-h:' + (opts.height || 172) + "px;--bar-gap:" + gap + 'px">' +
+      '<div class="plot-inner" role="img" aria-label="' + esc(opts.aria) + '">' + grid +
+      '<div class="bars">' + bars + "</div>" + avg + "</div>" +
+      '<div class="xaxis">' + axis + "</div></div>";
+  }
+
+  function tipRows(title, rows){
+    let h = '<div class="tt">' + esc(title) + "</div>";
+    rows.forEach(r => {
+      h += '<div class="tr"><span>' + (r.color ? '<i style="background:' + r.color + '"></i>' : "") + esc(r.k) + "</span><span>" + esc(r.v) + "</span></div>";
+    });
+    return h;
+  }
+
+  /* ===================== napi lefutás ===================== */
+  function renderHourly(day){
+    if(day.closed){
+      el("hourPlot").innerHTML = '<div class="empty"><strong>' + esc(day.closedNote || "Closed") + "</strong><span>No trading on this day.</span></div>";
+      el("hourHint").textContent = "";
+      el("hourTable").innerHTML = "";
+      return;
+    }
+    let peakH = day.slots[0], peakV = -1;
+    day.slots.forEach(s => {
+      const v = day.hourly[s].pos + day.hourly[s].pickup;
+      if(v > peakV){ peakV = v; peakH = s; }
+    });
+    const items = day.slots.map(s => {
+      const h = day.hourly[s];
+      const tot = h.pos + h.pickup;
+      return {
+        label: s + ":00",
+        hi: s === peakH,
+        peak: s === peakH ? eur.format(tot) : null,
+        segs:[{v:h.pos, color:"var(--ch-pos)"}, {v:h.pickup, color:"var(--ch-pickup)"}],
+        tip: tipRows(s + ":00–" + (s+1) + ":00", [
+          {k:"In-store", v:eur2.format(h.pos) + " · " + h.posOrders, color:"var(--ch-pos)"},
+          {k:"Pickup", v:eur2.format(h.pickup) + " · " + h.pickupOrders, color:"var(--ch-pickup)"},
+          {k:"Total", v:eur2.format(tot)}
+        ])
+      };
+    });
+    el("hourPlot").innerHTML = barChart({
+      items, max:Math.max(...day.slots.map(s => day.hourly[s].pos + day.hourly[s].pickup)),
+      tick: v => "€" + Math.round(v), height:176, gap:7,
+      aria:"Revenue per hour by channel, busiest at " + peakH + ":00"
+    });
+    el("hourHint").innerHTML = "Busiest <b>" + peakH + ":00</b>";
+
+    let rows = "";
+    day.slots.forEach(s => {
+      const h = day.hourly[s];
+      rows += "<tr><td>" + s + ":00</td><td>" + eur2.format(h.pos) + "</td><td>" + h.posOrders +
+        "</td><td>" + eur2.format(h.pickup) + "</td><td>" + h.pickupOrders + "</td><td>" + eur2.format(h.pos + h.pickup) + "</td></tr>";
+    });
+    el("hourTable").innerHTML = "<table><thead><tr><th>Hour</th><th>In-store</th><th>Orders</th><th>Pickup</th><th>Orders</th><th>Total</th></tr></thead><tbody>" + rows + "</tbody></table>";
+  }
+
+  /* ===================== csatornák ===================== */
+  function renderChannels(data, bodyId){
+    const box = el(bodyId);
+    if(data.closed){ box.innerHTML = '<div class="empty"><strong>Closed</strong></div>'; return; }
+    const defs = [
+      {key:"pos", name:"In-store", sub:"Lightspeed POS", color:"var(--ch-pos)"},
+      {key:"pickup", name:"Pickup pre-orders", sub:"Order Anywhere", color:"var(--ch-pickup)"}
+    ];
+    const total = data.gross || 1;
+    let html = '<div class="rows">';
+    defs.forEach(d => {
+      const c = data.channels[d.key];
+      const share = c.gross/total*100;
+      html += '<div class="row">' +
+        '<span class="name"><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:' + d.color + ';margin-right:7px"></span>' + esc(d.name) + "</span>" +
+        '<span class="val">' + eur2.format(c.gross) + "</span>" +
+        '<div class="track"><i style="width:' + share.toFixed(1) + "%;background:" + d.color + '"></i></div>' +
+        '<div class="sub"><span>' + esc(d.sub) + "</span><span>·</span><span>" + num.format(c.orders) + " orders</span><span>·</span><span>avg " +
+        eur2.format(c.aov) + '</span><span style="margin-left:auto">' + share.toFixed(0) + "%</span></div></div>";
+    });
+    html += "</div>";
+    const items = data.channels.pos.items + data.channels.pickup.items;
+    html += '<dl class="kv" style="margin-top:14px"><div class="sep"></div>' +
+      "<dt>Items sold</dt><dd>" + num.format(items) + "</dd>";
+    if(data.period){
+      html += "<dt>Trading days</dt><dd>" + num.format(data.openDays) + "</dd>" +
+              "<dt>Average day</dt><dd>" + eur2.format(data.dayAvg) + "</dd>";
+    }else{
+      html += "<dt>First sale</dt><dd>" + (data.ops.firstMin != null ? hhmm(data.ops.firstMin) : "—") + "</dd>" +
+              "<dt>Last sale</dt><dd>" + (data.ops.lastMin != null ? hhmm(data.ops.lastMin) : "—") + "</dd>";
+    }
+    html += "</dl>";
+    box.innerHTML = html;
+  }
+
+  /* ===================== átvételi sor ===================== */
+  function statusOf(day, q){
+    if(day.iso < state.today) return q.missed ? ["Not collected","st-miss"] : ["Collected","st-done"];
+    if(day.iso > state.today) return ["Scheduled","st-sched"];
+    const now = minutesNow();
+    if(q.at > now + 25) return ["Scheduled","st-sched"];
+    if(q.at > now - 4) return ["Baking","st-prep"];
+    if(q.at > now - 22) return ["Ready","st-ready"];
+    return q.missed ? ["Not collected","st-miss"] : ["Collected","st-done"];
+  }
+
+  function renderQueue(day){
+    if(day.closed){
+      el("queueBody").innerHTML = '<div class="empty"><strong>' + esc(day.closedNote || "Closed") + "</strong><span>No pickup slots.</span></div>";
+      el("queueHint").textContent = "";
+      return;
+    }
+    const all = day.queue.slice().sort((a,b) => a.at - b.at);
+    if(day.ops.noShow && all.length) all[Math.max(0, all.length - 3)].missed = true;
+    el("queueHint").textContent = day.iso === state.today ? "live" : all.length + " pre-orders";
+
+    let list = all;
+    if(day.iso === state.today){
+      const now = minutesNow();
+      const upcoming = all.filter(q => q.at >= now - 45);
+      list = upcoming.length >= 3 ? upcoming : all.slice(-7);
+    }
+    const shown = list.slice(0, 7);
+    if(!shown.length){
+      el("queueBody").innerHTML = '<div class="empty"><strong>No pre-orders</strong><span>Nothing came in through Order Anywhere.</span></div>';
+      return;
+    }
+    let html = '<div class="queue">';
+    shown.forEach(q => {
+      const st = statusOf(day, q);
+      const items = q.items.slice(0,3).join(", ") + (q.items.length > 3 ? " +" + (q.items.length-3) : "");
+      html += '<div class="q"><span class="time">' + hhmm(q.at) + "</span>" +
+        '<span class="items">' + esc(items) + "</span>" +
+        '<span class="st ' + st[1] + '">' + st[0] + "</span>" +
+        '<span class="ref">' + esc(q.ref) + "</span>" +
+        '<span class="amount">' + eur2.format(q.gross) + " · " + q.n + " items</span></div>";
+    });
+    html += "</div>";
+    if(all.length > shown.length) html += '<div class="note">+' + (all.length - shown.length) + " more today</div>";
+    el("queueBody").innerHTML = html;
+  }
+
+  /* ===================== teljesítés ===================== */
+  function renderOps(day){
+    if(day.closed){ el("opsBody").innerHTML = '<div class="empty"><strong>' + esc(day.closedNote || "Closed") + "</strong></div>"; return; }
+    const o = day.ops;
+    const flag = (v, warn) => v >= warn ? ' style="color:var(--warn)"' : "";
+    el("opsBody").innerHTML = '<dl class="kv">' +
+      "<dt>Median prep time</dt><dd>" + o.prepMedian.toFixed(1) + " <small>min</small></dd>" +
+      "<dt>Ready → collected</dt><dd>" + o.readyToCollect.toFixed(1) + " <small>min</small></dd>" +
+      "<dt>Collected late</dt><dd" + flag(o.late, 3) + ">" + o.late + "</dd>" +
+      "<dt>Not collected</dt><dd" + flag(o.noShow, 1) + ">" + o.noShow + "</dd>" +
+      '<div class="sep"></div>' +
+      "<dt>Cancelled</dt><dd" + flag(o.cancelled, 2) + ">" + o.cancelled + "</dd>" +
+      "<dt>Refunds</dt><dd>" + eur2.format(o.refunds) + "</dd>" +
+      "<dt>Sold out</dt><dd>" + Object.keys(day.soldOutAt).length + " <small>products</small></dd>" +
+      "</dl>";
+  }
+
+  /* ===================== fizetés ===================== */
+  function renderPay(data, bodyId){
+    const box = el(bodyId);
+    if(data.closed){ box.innerHTML = '<div class="empty"><strong>Closed</strong></div>'; return; }
+    const defs = [
+      {k:"pin", name:"Debit card (PIN)", sub:"in-store terminal"},
+      {k:"credit", name:"Credit card", sub:"in-store terminal"},
+      {k:"ideal", name:"iDEAL", sub:"online pre-orders"}
+    ];
+    const total = data.pay.pin + data.pay.credit + data.pay.ideal || 1;
+    let html = '<div class="rows">';
+    defs.forEach(d => {
+      const v = data.pay[d.k];
+      html += '<div class="row"><span class="name">' + esc(d.name) + '</span><span class="val">' + eur2.format(v) + "</span>" +
+        '<div class="track"><i style="width:' + (v/total*100).toFixed(1) + '%;background:var(--mag)"></i></div>' +
+        '<div class="sub"><span>' + esc(d.sub) + '</span><span style="margin-left:auto">' + (v/total*100).toFixed(0) + "%</span></div></div>";
+    });
+    html += "</div>";
+    html += '<dl class="kv" style="margin-top:14px"><div class="sep"></div><dt>Card turnover</dt><dd>' + eur2.format(total) + "</dd>" +
+      "<dt>Refunds</dt><dd>−" + eur2.format(data.ops.refunds) + "</dd>" +
+      "<dt>Expected payout</dt><dd>" + eur2.format(r2(total - data.ops.refunds)) + "</dd></dl>";
+    box.innerHTML = html;
+  }
+
+  /* ===================== termékek ===================== */
+  function renderProducts(data, bodyId, hintId){
+    const box = el(bodyId), hint = el(hintId);
+    if(data.closed){
+      box.innerHTML = '<div class="empty"><strong>Closed</strong></div>';
+      hint.textContent = "";
+      return;
+    }
+    let html = "", totalItems = 0;
+    ["roll","cookie","drink"].forEach(cat => {
+      const list = PRODUCTS.filter(p => p.cat === cat)
+        .map(p => ({p, qty:data.prodQty[p.id] || 0}))
+        .sort((a,b) => b.qty - a.qty);
+      const catTotal = list.reduce((s,x) => s + x.qty, 0);
+      totalItems += catTotal;
+      const max = Math.max(1, ...list.map(x => x.qty));
+      html += '<div class="cat">' + CAT_LABEL[cat] + " · " + num.format(catTotal) + "</div>";
+      list.forEach(x => {
+        let chip = "";
+        if(data.period){
+          const c = data.soldOutCount[x.p.id] || 0;
+          if(c) chip = '<span class="soldout">sold out ' + c + (c === 1 ? " day" : " days") + "</span>";
+        }else if(data.soldOutAt[x.p.id] != null){
+          chip = '<span class="soldout">sold out ' + hhmm(data.soldOutAt[x.p.id]) + "</span>";
+        }
+        html += '<div class="prod"><span class="pname">' + esc(x.p.name) + chip + "</span>" +
+          '<span class="pqty">' + num.format(x.qty) + "</span>" +
+          '<span class="pshare">' + (catTotal ? (x.qty/catTotal*100).toFixed(0) : 0) + "%</span>" +
+          '<div class="ptrack"><i style="width:' + (x.qty/max*100).toFixed(1) + '%"></i></div></div>';
+      });
+    });
+    box.innerHTML = html;
+    hint.textContent = num.format(totalItems) + " items";
+  }
+
+  /* ===================== 14 napos trend ===================== */
+  function renderTrend(iso){
+    const days = [];
+    for(let i = 13; i >= 0; i--) days.push(getDay(shiftIso(iso, -i)));
+    const open = days.filter(d => !d.closed);
+    const avg = open.length ? open.reduce((s,d) => s + d.gross, 0)/open.length : 0;
+    const max = Math.max(1, ...open.map(d => d.gross));
+
+    const items = days.map(d => ({
+      label: DOW_S[d.dow].slice(0,2),
+      hi: d.iso === iso,
+      closed: d.closed,
+      segs:[{v:d.closed ? 0 : d.gross, color: d.iso === iso ? "var(--brand)" : "var(--mag)"}],
+      tip: d.closed
+        ? tipRows(DOW[d.dow] + ", " + shortDate(d.iso), [{k: d.before ? "Not open yet" : "Closed", v:"—"}])
+        : tipRows(DOW[d.dow] + ", " + shortDate(d.iso), [
+            {k:"Revenue", v:eur2.format(d.gross)},
+            {k:"Orders", v:String(d.orders)},
+            {k:"Average basket", v:eur2.format(d.aov)}
+          ])
+    }));
+    el("trendPlot").innerHTML = barChart({
+      items, max, gap:5, height:150,
+      tick: v => "€" + Math.round(v),
+      avg, avgLabel:"avg " + eur.format(avg),
+      aria:"Daily revenue over the last 14 days, average " + eur.format(avg)
+    });
+
+    let rows = "";
+    days.slice().reverse().forEach(d => {
+      rows += "<tr><td>" + shortDate(d.iso) + " " + DOW_S[d.dow] + "</td><td>" +
+        (d.closed ? "closed" : eur2.format(d.gross)) + "</td><td>" + (d.closed ? "—" : d.orders) +
+        "</td><td>" + (d.closed ? "—" : eur2.format(d.aov)) + "</td></tr>";
+    });
+    el("trendTable").innerHTML = "<table><thead><tr><th>Day</th><th>Revenue</th><th>Orders</th><th>Avg basket</th></tr></thead><tbody>" + rows + "</tbody></table>";
+  }
+
+  /* ===================== csoportos oszlopok (év/év) ===================== */
+  function groupChart(opts){
+    const max = niceMax(opts.max);
+    let grid = "";
+    for(let i = 0; i <= 4; i++){
+      grid += '<div class="gridline' + (i === 0 ? " base" : "") + '" style="bottom:' + i*25 + '%"><span>' +
+        esc(opts.tick(max*i/4)) + "</span></div>";
+    }
+    let bars = "", axis = "";
+    opts.items.forEach(it => {
+      const prevH = it.prev > 0 ? (it.prev/max*100).toFixed(2) + "%" : "2px";
+      bars += '<button type="button" class="bar group' + (it.sel ? " sel" : "") + '" data-jump="' + esc(it.jump) +
+        '" data-tip="' + esc(it.tip) + '" aria-label="' + esc(it.aria) + '">' +
+        '<i class="prev' + (it.prev > 0 ? "" : " none") + '" style="height:' + prevH + '"></i>' +
+        '<i class="cur" style="height:' + (it.cur > 0 ? (it.cur/max*100).toFixed(2) + "%" : "2px") + '"></i></button>';
+      axis += '<span class="' + (it.sel ? "hi" : "") + '">' + esc(it.label) + "</span>";
+    });
+    return '<div class="plot" style="--plot-h:' + (opts.height || 168) + "px;--bar-gap:" + (opts.gap || 6) + 'px">' +
+      '<div class="plot-inner" role="img" aria-label="' + esc(opts.aria) + '">' + grid +
+      '<div class="bars">' + bars + "</div></div>" +
+      '<div class="xaxis">' + axis + "</div></div>";
+  }
+
+  /* ===================== hónapok összehasonlítása ===================== */
+  function renderCompare(year, selMonth){
+    const prevYear = String(+year - 1);
+    const cur = monthsOfYear(year).map(monthAgg);
+    const prev = monthsOfYear(prevYear).map(monthAgg);
+    const max = Math.max(1, ...cur.map(a => a.gross), ...prev.map(a => a.gross));
+
+    el("cmpLegend").innerHTML =
+      '<span><i style="background:var(--mag)"></i>' + year + "</span>" +
+      '<span><i style="background:var(--mag-soft);border:1px solid var(--line-strong)"></i>' + prevYear + "</span>";
+
+    const items = cur.map((a, i) => {
+      const m = monthsOfYear(year)[i], pv = prev[i];
+      const diff = pv.gross > 0 ? (a.gross - pv.gross)/pv.gross*100 : null;
+      return {
+        label: MON[i], jump: m, sel: m === selMonth, cur: a.gross, prev: pv.gross,
+        aria: MONTHS_FULL[i] + " " + year + ", " + eur.format(a.gross),
+        tip: tipRows(MONTHS_FULL[i], [
+          {k:year, v:a.gross > 0 ? eur2.format(a.gross) : "—"},
+          {k:prevYear, v:pv.gross > 0 ? eur2.format(pv.gross) : "—"},
+          {k:"Change", v:diff == null ? "—" : (diff > 0 ? "+" : "") + diff.toFixed(0) + "%"}
+        ])
+      };
+    });
+    el("cmpPlot").innerHTML = groupChart({
+      items, max, tick: v => "€" + Math.round(v), height:172, gap:6,
+      aria:"Monthly revenue in " + year + " compared with " + prevYear
+    });
+    el("cmpHint").textContent = "Click a month to open it";
+
+    let rows = "";
+    cur.forEach((a, i) => {
+      const m = monthsOfYear(year)[i];
+      if(!a.openDays && !prev[i].openDays) return;
+      const pm = i > 0 ? cur[i-1] : monthAgg(shiftMonth(m, -1));
+      const dm = pm.gross > 0 && a.gross > 0 ? (a.gross - pm.gross)/pm.gross*100 : null;
+      const dy = prev[i].gross > 0 && a.gross > 0 ? (a.gross - prev[i].gross)/prev[i].gross*100 : null;
+      const cell = v => v == null ? '<td class="mut">—</td>' :
+        '<td class="' + (v >= 0 ? "pos" : "neg") + '">' + (v > 0 ? "+" : "") + v.toFixed(0) + "%</td>";
+      rows += "<tr" + (m === selMonth ? ' class="sel"' : "") + "><td>" + MONTHS_FULL[i] + "</td><td>" +
+        (a.openDays ? eur2.format(a.gross) : "—") + "</td><td>" + (a.openDays ? num.format(a.orders) : "—") +
+        "</td><td>" + (a.openDays ? eur2.format(a.aov) : "—") + "</td><td>" + (a.openDays ? a.openDays : "—") + "</td>" +
+        cell(dm) + cell(dy) + "</tr>";
+    });
+    el("cmpTable").innerHTML = "<table><thead><tr><th>Month</th><th>Revenue</th><th>Orders</th><th>Avg basket</th>" +
+      "<th>Days</th><th>vs prev month</th><th>vs " + prevYear + "</th></tr></thead><tbody>" + rows + "</tbody></table>";
+  }
+
+  /* ===================== időszak tényei ===================== */
+  function renderFacts(agg, isYear){
+    if(agg.closed){ el("factsBody").innerHTML = '<div class="empty"><strong>No trading days</strong></div>'; return; }
+    const dayLine = d => d ? shortDate(d.iso) + " " + DOW_S[d.dow] + " · " + eur2.format(d.gross) : "—";
+    let html = '<dl class="kv">' +
+      "<dt>Trading days</dt><dd>" + num.format(agg.openDays) + "</dd>" +
+      "<dt>Average day</dt><dd>" + eur2.format(agg.dayAvg) + "</dd>" +
+      "<dt>Best day</dt><dd>" + dayLine(agg.best) + "</dd>" +
+      "<dt>Quietest day</dt><dd>" + dayLine(agg.worst) + "</dd>";
+    if(isYear){
+      const months = monthsOfYear(state.year).map(monthAgg).filter(a => a.openDays);
+      const bestM = months.slice().sort((a,b) => b.gross - a.gross)[0];
+      html += "<dt>Best month</dt><dd>" + (bestM ? bestM.label + " · " + eur.format(bestM.gross) : "—") + "</dd>";
+    }
+    html += '<div class="sep"></div>' +
+      "<dt>Sold-out events</dt><dd>" + num.format(agg.soldOutDays) + "</dd>" +
+      "<dt>Collected late</dt><dd>" + num.format(agg.ops.late) + "</dd>" +
+      "<dt>Not collected</dt><dd>" + num.format(agg.ops.noShow) + "</dd>" +
+      "<dt>Cancelled</dt><dd>" + num.format(agg.ops.cancelled) + "</dd>" +
+      "<dt>Refunds</dt><dd>" + eur2.format(agg.ops.refunds) + "</dd></dl>";
+    el("factsBody").innerHTML = html;
+  }
+
+  /* ===================== heti mintázat / negyedévek ===================== */
+  function renderBreakdown(agg, isYear){
+    if(isYear){
+      el("breakTitle").textContent = "Quarters";
+      const prevY = String(+state.year - 1);
+      let html = '<div class="rows">';
+      const maxQ = Math.max(1, ...[0,1,2,3].map(q => quarter(state.year, q).gross));
+      [0,1,2,3].forEach(q => {
+        const a = quarter(state.year, q), b = quarter(prevY, q);
+        const diff = b.gross > 0 && a.gross > 0 ? (a.gross - b.gross)/b.gross*100 : null;
+        html += '<div class="row"><span class="name">Q' + (q+1) + '</span><span class="val">' +
+          (a.gross > 0 ? eur2.format(a.gross) : "—") + "</span>" +
+          '<div class="track"><i style="width:' + (a.gross/maxQ*100).toFixed(1) + '%;background:var(--mag)"></i></div>' +
+          '<div class="sub"><span>' + (a.openDays ? num.format(a.orders) + " orders" : "no trading") + "</span>" +
+          '<span style="margin-left:auto">' + (diff == null ? "vs " + prevY + ": —" :
+            "vs " + prevY + ": " + (diff > 0 ? "+" : "") + diff.toFixed(0) + "%") + "</span></div></div>";
+      });
+      el("breakBody").innerHTML = html + "</div>";
+      el("breakHint").textContent = "";
+      return;
+    }
+    el("breakTitle").textContent = "Weekday pattern";
+    el("breakHint").textContent = "average per open day";
+    const order = [2,3,4,5,6,0];
+    const avgs = order.map(d => {
+      const b = agg.byDow[d];
+      return {d, avg: b ? b.sum/b.n : 0, n: b ? b.n : 0};
+    });
+    const max = Math.max(1, ...avgs.map(a => a.avg));
+    let html = '<div class="rows">';
+    avgs.forEach(a => {
+      html += '<div class="row"><span class="name">' + DOW[a.d] + '</span><span class="val">' +
+        (a.n ? eur2.format(Math.round(a.avg*100)/100) : "—") + "</span>" +
+        '<div class="track"><i style="width:' + (a.avg/max*100).toFixed(1) + '%;background:var(--mag)"></i></div>' +
+        '<div class="sub"><span>' + (a.n ? a.n + (a.n === 1 ? " day" : " days") : "no trading") + "</span></div></div>";
+    });
+    el("breakBody").innerHTML = html + "</div>";
+  }
+  function quarter(year, q){
+    const ms = [0,1,2].map(i => year + "-" + String(q*3 + i + 1).padStart(2,"0"));
+    return aggregate(ms.flatMap(daysOfMonth), "Q" + year + "-" + q, "Q" + (q+1) + " " + year);
+  }
+
+  /* ===================== hónap / év nézet ===================== */
+  function renderPeriodView(){
+    const isYear = state.view === "year";
+    const agg = isYear ? yearAgg(state.year) : monthAgg(state.month);
+    /* a futó hónapot/évet azonos hosszú szakasszal vetjük össze, nem a teljes előzővel */
+    const running = isYear ? state.year === TODAY.slice(0,4) : state.month === TODAY.slice(0,7);
+    const dayLim = +TODAY.slice(8);
+    let comps;
+    if(isYear){
+      const py = String(+state.year - 1);
+      comps = [{label: "vs " + py + (running ? " (same period)" : ""),
+                data: running ? yearAggTo(py, TODAY.slice(5)) : yearAgg(py)}];
+    }else{
+      const pm = shiftMonth(state.month, -1), ly = shiftMonth(state.month, -12);
+      comps = [
+        {label:"vs " + monthShort(pm) + (running ? " (1–" + dayLim + ")" : ""),
+         data: running ? monthAggTo(pm, dayLim) : monthAgg(pm)},
+        {label:"vs " + monthShort(ly) + (running ? " (1–" + dayLim + ")" : ""),
+         data: running ? monthAggTo(ly, dayLim) : monthAgg(ly)}
+      ];
+    }
+
+    let spark = null;
+    if(!isYear){
+      spark = [];
+      for(let i = 11; i >= 0; i--){
+        const a = monthAgg(shiftMonth(state.month, -i));
+        spark.push(a.openDays ? a.gross : null);
+      }
+    }
+    agg.closedNote = "No trading days";
+    renderKpis(agg, comps, spark);
+
+    /* fő diagram */
+    if(isYear){
+      el("periodPlotTitle").textContent = "Month by month";
+      const ms = monthsOfYear(state.year);
+      const aggs = ms.map(monthAgg);
+      const items = aggs.map((a, i) => ({
+        label: MON[i],
+        closed: !a.openDays,
+        segs:[{v:a.channels.pos.gross, color:"var(--ch-pos)"}, {v:a.channels.pickup.gross, color:"var(--ch-pickup)"}],
+        tip: a.openDays ? tipRows(MONTHS_FULL[i] + " " + state.year, [
+          {k:"In-store", v:eur2.format(a.channels.pos.gross), color:"var(--ch-pos)"},
+          {k:"Pickup", v:eur2.format(a.channels.pickup.gross), color:"var(--ch-pickup)"},
+          {k:"Total", v:eur2.format(a.gross)},
+          {k:"Orders", v:num.format(a.orders)}
+        ]) : tipRows(MONTHS_FULL[i] + " " + state.year, [{k:"No trading", v:"—"}])
+      }));
+      el("periodPlot").innerHTML = barChart({
+        items, max:Math.max(1, ...aggs.map(a => a.gross)), tick: v => "€" + Math.round(v),
+        height:186, gap:7, aria:"Monthly revenue by channel in " + state.year
+      });
+      el("periodPlotHint").textContent = agg.openDays + " trading days" + (running ? " · year to date" : "");
+      let rows = "";
+      aggs.forEach((a, i) => {
+        if(!a.openDays) return;
+        rows += "<tr><td>" + MONTHS_FULL[i] + "</td><td>" + eur2.format(a.channels.pos.gross) + "</td><td>" +
+          eur2.format(a.channels.pickup.gross) + "</td><td>" + eur2.format(a.gross) + "</td><td>" +
+          num.format(a.orders) + "</td><td>" + eur2.format(a.aov) + "</td></tr>";
+      });
+      el("periodTable").innerHTML = "<table><thead><tr><th>Month</th><th>In-store</th><th>Pickup</th><th>Total</th><th>Orders</th><th>Avg basket</th></tr></thead><tbody>" + rows + "</tbody></table>";
+    }else{
+      el("periodPlotTitle").textContent = "Day by day";
+      const isos = daysOfMonth(state.month);
+      const days = isos.map(getDay);
+      const items = days.map((d, i) => {
+        const n = i + 1;
+        return {
+          label: (n === 1 || n % 5 === 0) ? String(n) : "",
+          closed: d.closed,
+          segs:[{v:d.closed ? 0 : d.channels.pos.gross, color:"var(--ch-pos)"},
+                {v:d.closed ? 0 : d.channels.pickup.gross, color:"var(--ch-pickup)"}],
+          tip: d.closed
+            ? tipRows(shortDate(d.iso) + " " + DOW_S[d.dow], [{k: d.before ? "Not open yet" : "Closed", v:"—"}])
+            : tipRows(shortDate(d.iso) + " " + DOW_S[d.dow], [
+                {k:"In-store", v:eur2.format(d.channels.pos.gross), color:"var(--ch-pos)"},
+                {k:"Pickup", v:eur2.format(d.channels.pickup.gross), color:"var(--ch-pickup)"},
+                {k:"Total", v:eur2.format(d.gross)},
+                {k:"Orders", v:String(d.orders)}
+              ])
+        };
+      });
+      const open = days.filter(d => !d.closed);
+      const avg = open.length ? open.reduce((x,d) => x + d.gross, 0)/open.length : 0;
+      el("periodPlot").innerHTML = barChart({
+        items, max:Math.max(1, ...open.map(d => d.gross)), tick: v => "€" + Math.round(v),
+        height:186, gap:3, avg, avgLabel:"avg " + eur.format(avg),
+        aria:"Daily revenue by channel in " + monthLabel(state.month)
+      });
+      el("periodPlotHint").textContent = agg.openDays + " trading days" + (running ? " · month to date" : "");
+      let rows = "";
+      days.forEach(d => {
+        if(d.closed) return;
+        rows += "<tr><td>" + shortDate(d.iso) + " " + DOW_S[d.dow] + "</td><td>" + eur2.format(d.channels.pos.gross) +
+          "</td><td>" + eur2.format(d.channels.pickup.gross) + "</td><td>" + eur2.format(d.gross) +
+          "</td><td>" + d.orders + "</td><td>" + eur2.format(d.aov) + "</td></tr>";
+      });
+      el("periodTable").innerHTML = "<table><thead><tr><th>Day</th><th>In-store</th><th>Pickup</th><th>Total</th><th>Orders</th><th>Avg basket</th></tr></thead><tbody>" + rows + "</tbody></table>";
+    }
+
+    el("cmpTitle").textContent = isYear ? "Months of " + state.year : "Months compared";
+    renderCompare(isYear ? state.year : state.month.slice(0,4), isYear ? null : state.month);
+    renderChannels(agg, "chanBody2");
+    renderFacts(agg, isYear);
+    renderBreakdown(agg, isYear);
+    renderPay(agg, "payBody2");
+    renderProducts(agg, "prodBody2", "prodHint2");
+    state.shown = agg;
+  }
+
+  function renderDayView(){
+    const day = getDay(state.sel);
+    day.closedNote = day.before ? "Not open yet" : "Closed";
+    const prev = getDay(shiftIso(day.iso, -7));
+    const spark = [];
+    for(let i = 13; i >= 0; i--){
+      const d = getDay(shiftIso(day.iso, -i));
+      spark.push(d.closed ? null : d.gross);
+    }
+    renderKpis(day, [{label:"vs last " + DOW[day.dow], data:prev}], spark);
+    renderHourly(day);
+    renderChannels(day, "chanBody");
+    renderQueue(day);
+    renderOps(day);
+    renderPay(day, "payBody");
+    renderProducts(day, "prodBody", "prodHint");
+    renderTrend(state.sel);
+    state.shown = day;
+  }
+
+  /* ===================== fejléc ===================== */
+  function renderHeader(){
+    const v = state.view;
+    const curMonth = ym(state.today), curYear = state.today.slice(0,4);
+    let label, atStart, atEnd;
+    if(v === "day"){
+      label = state.sel === state.today ? "Today · " + DOW_S[dowOf(state.sel)] : longDate(state.sel) + " · " + DOW_S[dowOf(state.sel)];
+      atStart = state.sel <= OPENED; atEnd = state.sel >= state.today;
+      el("todayBtn").textContent = "Today";
+    }else if(v === "month"){
+      label = monthLabel(state.month);
+      atStart = state.month <= OPENED.slice(0,7); atEnd = state.month >= curMonth;
+      el("todayBtn").textContent = "This month";
+    }else{
+      label = state.year;
+      atStart = state.year <= OPENED.slice(0,4); atEnd = state.year >= curYear;
+      el("todayBtn").textContent = "This year";
+    }
+    el("dateLabel").textContent = label;
+    el("prevDay").disabled = atStart;
+    el("nextDay").disabled = atEnd;
+    el("todayBtn").disabled = atEnd;
+
+    const chip = el("openChip"), txt = el("openTxt");
+    const h = hours(state.today);
+    const now = minutesNow();
+    if(h && now >= h.from*60 && now < h.to*60){
+      chip.className = "chip chip-open";
+      txt.textContent = "Open now · until " + h.to + ":00";
+    }else{
+      chip.className = "chip chip-closed";
+      let next = state.today, guard = 0;
+      do{ next = shiftIso(next, 1); guard++; } while(!hours(next) && guard < 8);
+      const nh = hours(next);
+      txt.textContent = h && now < h.from*60
+        ? "Closed · opens " + h.from + ":00"
+        : "Closed · " + DOW[dowOf(next)] + " " + (nh ? nh.from : 10) + ":00";
+    }
+
+    const shown = state.shown;
+    const live = shown ? (shown.period ? (shown.hasLive && !shown.hasDemo) : state.live.has(shown.iso)) : false;
+    el("srcChip").textContent = live ? "Live data" : "Demo data";
+    el("demoBanner").hidden = live;
+  }
+
+  /* ===================== fő render ===================== */
+  function render(){
+    const v = state.view;
+    el("dayBoard").hidden = v !== "day";
+    el("periodBoard").hidden = v === "day";
+    Array.prototype.forEach.call(el("viewSeg").children, b => b.classList.toggle("on", b.dataset.view === v));
+    if(v === "day") renderDayView(); else renderPeriodView();
+    renderHeader();
+  }
+
+  /* ===================== események ===================== */
+  const curMonth = () => ym(state.today);
+  function step(k){
+    if(state.view === "day"){
+      const next = shiftIso(state.sel, k);
+      if(next < OPENED || next > state.today) return;
+      state.sel = next;
+    }else if(state.view === "month"){
+      const next = shiftMonth(state.month, k);
+      if(next < OPENED.slice(0,7) || next > curMonth()) return;
+      state.month = next;
+    }else{
+      const next = String(+state.year + k);
+      if(next < OPENED.slice(0,4) || next > state.today.slice(0,4)) return;
+      state.year = next;
+    }
+    render();
+  }
+  el("prevDay").addEventListener("click", () => step(-1));
+  el("nextDay").addEventListener("click", () => step(1));
+  el("todayBtn").addEventListener("click", () => {
+    if(state.view === "day") state.sel = state.today;
+    else if(state.view === "month") state.month = curMonth();
+    else state.year = state.today.slice(0,4);
+    render();
+  });
+  document.addEventListener("keydown", e => {
+    if(e.target && e.target.closest && e.target.closest("input, textarea, button")) return;
+    if(e.key === "ArrowLeft") step(-1);
+    if(e.key === "ArrowRight") step(1);
+  });
+
+  el("viewSeg").addEventListener("click", e => {
+    const b = e.target.closest("[data-view]");
+    if(!b || b.dataset.view === state.view) return;
+    const from = state.view;
+    state.view = b.dataset.view;
+    if(state.view === "month" && from === "day") state.month = ym(state.sel);
+    if(state.view === "month" && from === "year"){
+      state.month = state.year === state.today.slice(0,4) ? curMonth() : state.year + "-12";
+    }
+    if(state.view === "year") state.year = (from === "day" ? state.sel : state.month).slice(0,4);
+    if(state.view === "day" && from !== "day"){
+      const target = state.view === "day" && from === "month" ? state.month : state.year + "-12";
+      state.sel = ym(state.today) === target.slice(0,7) ? state.today : target.slice(0,7) + "-15";
+      if(state.sel > state.today) state.sel = state.today;
+      if(state.sel < OPENED) state.sel = OPENED;
+    }
+    render();
+  });
+
+  document.addEventListener("click", e => {
+    const jump = e.target.closest("[data-jump]");
+    if(jump){
+      state.view = "month";
+      state.month = jump.dataset.jump;
+      render();
+      return;
+    }
+    const btn = e.target.closest(".tbtn[data-table]");
+    if(!btn) return;
+    const t = el(btn.dataset.table);
+    t.hidden = !t.hidden;
+    btn.textContent = t.hidden ? "Table" : "Chart";
+  });
+
+  /* tooltip */
+  const tip = el("tip");
+  function moveTip(e){
+    const pad = 12;
+    let x = e.clientX + pad, y = e.clientY + pad;
+    const r = tip.getBoundingClientRect();
+    if(x + r.width > window.innerWidth - 8) x = e.clientX - r.width - pad;
+    if(y + r.height > window.innerHeight - 8) y = e.clientY - r.height - pad;
+    tip.style.left = Math.max(8, x) + "px";
+    tip.style.top = Math.max(8, y) + "px";
+  }
+  document.addEventListener("pointerover", e => {
+    const b = e.target.closest("[data-tip]");
+    if(!b){ tip.classList.remove("on"); return; }
+    tip.innerHTML = b.dataset.tip;
+    tip.classList.add("on");
+    moveTip(e);
+  });
+  document.addEventListener("pointermove", e => { if(tip.classList.contains("on")) moveTip(e); });
+  document.addEventListener("pointerleave", () => tip.classList.remove("on"));
+  window.addEventListener("scroll", () => tip.classList.remove("on"), {passive:true});
+
+  render();
+})();
+</script>
+</body>
+</html>
