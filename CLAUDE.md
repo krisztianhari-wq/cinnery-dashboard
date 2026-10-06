@@ -22,7 +22,7 @@ Napi/havi/éves forgalmi dashboard a Cinnery pékségnek, egyetlen statikus `ind
 3. Valódi adat a `LIVE_DAYS`-be: kulcs = ISO dátum, érték = a `genDay()`-jel azonos alakú objektum; egy ott szereplő nap felülírja a demót és eltünteti a bannert.
 4. Nyelv: EN (alap) / NL / HU fejléc-váltóval, localStorage-ban megjegyezve; a hét/hónap nevek, dátumsorrend, szám- és pénzformátum a nyelvet követi.
 5. Betűk: Fredoka + IBM Plex Sans/Mono (Google Fonts – itt szándékosan nem él a weboldal „nulla harmadik fél” szabálya). Csatornaszínek: lila #4a3aa7 (POS), rózsaszín #e87ba4 (átvétel), mindkét témában validálva.
-6. **Hozzáférés:** a nyilvános Pages csak addig elfogadható, amíg demóadat van rajta. Az első valódi szám előtt a repót priváttá kell tenni és a Pages-t kikapcsolni (különben a régi URL tovább szolgálja), az oldal pedig csak jelszó/passkey mögött futhat.
+6. **Hozzáférés:** a nyilvános Pages csak addig elfogadható, amíg demóadat van rajta. Az első valódi szám előtt a repót priváttá kell tenni és a Pages-t kikapcsolni (különben a régi URL tovább szolgálja), valódi adat csak a passkey mögötti sadrobot-példányon (`/deploy-sadrobot`) jelenhet meg.
 
 ## Nyitott
 - Lightspeed bekötése (valódi napok a `LIVE_DAYS`-be).
